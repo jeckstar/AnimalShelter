@@ -13,12 +13,12 @@ public class Volunteer {
     }
 
     public void takeToTheWalk(final Animal animal) {
-        final Date nextWalkTime = new Date(animal.getLastWalkTime().getTime() + animal.getPeriod());
+        final Date nextWalkTime = new Date(animal.getLastWalkTime().getTime() + animal.getWalkPeriod());
         if (new Date().after(nextWalkTime)) {
             //гуляем
             walkRepository.takeAnimalForWalk(this, animal);
         } else {
-            throw new WalkException("It is not time to walk yet");
+//            throw new WalkException("It is not time to walk yet");
         }
     }
 
