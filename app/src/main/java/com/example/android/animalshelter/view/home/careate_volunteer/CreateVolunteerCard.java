@@ -1,13 +1,13 @@
 package com.example.android.animalshelter.view.home.careate_volunteer;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.animalshelter.R;
 
+import androidx.fragment.app.Fragment;
 
 public class CreateVolunteerCard extends Fragment {
 

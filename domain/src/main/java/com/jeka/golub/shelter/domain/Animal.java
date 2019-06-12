@@ -8,7 +8,7 @@ public class Animal {
     private final String kind;
     private final String name;
     private final int sex;
-    private final String age;
+    private final int age;
     private final long shelterId;
     private final Date lastWalkTime;
     private final long walkPeriod;
@@ -17,7 +17,7 @@ public class Animal {
             long id,
             String kind,
             String name,
-            String age,
+            int age,
             int sex,
             long shelterId,
             Date lastWalkTime,
@@ -36,7 +36,7 @@ public class Animal {
     public Animal(
             String kind,
             String name,
-            String age,
+            int age,
             int sex,
             long shelterId,
             long walkPeriod
@@ -71,7 +71,7 @@ public class Animal {
         return lastWalkTime;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 

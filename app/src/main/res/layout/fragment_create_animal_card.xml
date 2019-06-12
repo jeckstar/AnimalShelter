@@ -1,14 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orangeFE"
     tools:context=".view.home.create_animal.CreateAnimalCard">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_animal_card_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/animal_registration_card"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_animal_card_animal_kind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/enter_kind"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.295" />
+
+    <EditText
+        android:id="@+id/et_animal_card_animal_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/enter_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_kind" />
+
+    <TextView
+        android:id="@+id/et_animal_card_animal_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/enter_age"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/et_animal_card_animal_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_name" />
+
+    <TextView
+        android:id="@+id/et_animal_card_animal_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/enter_sex"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/et_animal_card_animal_age"
+        app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_age" />
+
+    <TextView
+        android:id="@+id/et_animal_card_animal_walk_periodic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/enter_walk_periodic"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/et_animal_card_animal_sex"
+        app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_sex" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_animal_card_animal_walk_periodic"
+        app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_name">
+
+        <Spinner
+            android:id="@+id/spinner_animal_card_age"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:paddingRight="16dp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/spinner_animal_card_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:paddingRight="16dp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/spinner_animal_card_period"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:paddingRight="16dp"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_new_animal_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

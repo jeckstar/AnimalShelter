@@ -1,19 +1,19 @@
 package com.jeka.golub.shelter.domain;
 
-import com.jeka.golub.shelter.domain.repositories.WalkRepository;
+import com.jeka.golub.shelter.domain.repositories.IWalkRepository;
 
 import java.util.Date;
 
 public class Volunteer {
 
-    private final WalkRepository walkRepository;
+    private final IWalkRepository walkRepository;
 
     private final long id;
     private final String firstName;
     private final String lastName;
 
     public Volunteer(
-            WalkRepository walkRepository,
+            IWalkRepository walkRepository,
             long id,
             String firstName,
             String lastName
@@ -35,7 +35,7 @@ public class Volunteer {
         this.walkRepository = null;
     }
 
-    public Volunteer(WalkRepository walkRepository,
+    public Volunteer(IWalkRepository walkRepository,
                      String firstName,
                      String lastName
     ) {
@@ -49,7 +49,6 @@ public class Volunteer {
     public void takeToTheWalk(final Animal animal) {
         final Date nextWalkTime = new Date(animal.getLastWalkTime().getTime() + animal.getWalkPeriod());
         if (new Date().after(nextWalkTime)) {
-            //гуляем
             walkRepository.takeAnimalForWalk(this, animal);
         } else {
 //            throw new WalkException("It is not time to walk yet");

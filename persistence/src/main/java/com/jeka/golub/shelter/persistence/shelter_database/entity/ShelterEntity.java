@@ -2,6 +2,7 @@ package com.jeka.golub.shelter.persistence.shelter_database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -25,16 +26,17 @@ public class ShelterEntity {
     @ColumnInfo(name = ADDRESS)
     private final String address;
     @ColumnInfo(name = PHONE_NUMBER)
-    private final long phoneNumber;
+    private final String phoneNumber;
 
-    public ShelterEntity(long id, String title, String address, long phoneNumber) {
+    public ShelterEntity(long id, String title, String address, String phoneNumber) {
         this.id = id;
         this.title = title;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
-    public ShelterEntity( String title, String address, long phoneNumber) {
+    @Ignore
+    public ShelterEntity( String title, String address, String phoneNumber) {
         this.id = 0L;
         this.title = title;
         this.address = address;
@@ -53,7 +55,7 @@ public class ShelterEntity {
         return address;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 }

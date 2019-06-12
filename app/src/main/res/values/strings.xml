@@ -4,4 +4,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_shelter_title">Enter shelter title</string>
+    <string name="edit_address">Edit address</string>
+    <string name="save">save</string>
+    <string name="enter_kind">Enter kind</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_age">Enter age</string>
+    <string name="enter_sex">Enter sex</string>
+    <string name="enter_walk_periodic">Enter walk periodic</string>
+    <string name="animal_registration_card">Animal registration card</string>
+    <string name="shelter_createing_card">Shelter createing card</string>
+    <string name="volunteer_registration_card">Volunteer registration card</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="enter_last_name">Enter last name</string>
 </resources>

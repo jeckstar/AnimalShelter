@@ -4,6 +4,7 @@ package com.jeka.golub.shelter.persistence.shelter_database.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -37,7 +38,7 @@ public class AnimalEntity {
     @ColumnInfo(name = NAME)
     private final String name;
     @ColumnInfo(name = AGE)
-    private final String age;
+    private final int age;
     @ColumnInfo(name = SEX)
     private final int sex;
     @ColumnInfo(name = SHELTER_ID)
@@ -51,7 +52,7 @@ public class AnimalEntity {
             long id,
             String kind,
             String name,
-            String age,
+            int age,
             int sex,
             long shelterId,
             String walkTime,
@@ -67,10 +68,11 @@ public class AnimalEntity {
         this.walkPeriod = walkPeriod;
     }
 
+    @Ignore
     public AnimalEntity(
             String kind,
             String name,
-            String age,
+            int age,
             int sex,
             long shelterId,
             String walkTime,
@@ -98,7 +100,7 @@ public class AnimalEntity {
         return name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -114,8 +116,7 @@ public class AnimalEntity {
         return walkTime;
     }
 
-    public long getWalkCount() {
+    public long getWalkPeriod() {
         return walkPeriod;
     }
-
 }

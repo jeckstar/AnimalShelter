@@ -5,16 +5,16 @@ public class Shelter {
     private final long id;
     private final String title;
     private final String address;
-    private final long phoneNumber;
+    private final String phoneNumber;
 
-    public Shelter(long id, String title, String address, long phoneNumber) {
+    public Shelter(long id, String title, String address, String phoneNumber) {
         this.id = id;
         this.title = title;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
-    public Shelter(String title, String address, long phoneNumber) {
+    public Shelter(String title, String address, String phoneNumber) {
         this.id = 0L;
         this.title = title;
         this.address = address;
@@ -33,7 +33,7 @@ public class Shelter {
         return address;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 }

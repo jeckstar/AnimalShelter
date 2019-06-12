@@ -3,7 +3,6 @@ package com.jeka.golub.shelter.persistence.converters;
 import com.jeka.golub.shelter.domain.Animal;
 import com.jeka.golub.shelter.persistence.shelter_database.entity.AnimalEntity;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -13,20 +12,18 @@ public class AnimalEntityConverter implements Converter<AnimalEntity, Animal> {
 
     @Override
     public AnimalEntity convertForward(Animal subject) {
-        final DateFormat dateFormat = DATE_FORMAT;
         return new AnimalEntity(subject.getId(),
                 subject.getKind(),
                 subject.getName(),
                 subject.getAge(),
                 subject.getSex(),
                 subject.getShelterId(),
-                dateFormat.format(subject.getLastWalkTime()),
+                DATE_FORMAT.format(subject.getLastWalkTime()),
                 subject.getWalkPeriod());
     }
 
     @Override
     public Animal convertReverse(AnimalEntity subject){
-        final DateFormat dateFormat = DATE_FORMAT;
         try {
             return new Animal(subject.getId(),
                     subject.getKind(),
@@ -34,8 +31,8 @@ public class AnimalEntityConverter implements Converter<AnimalEntity, Animal> {
                     subject.getAge(),
                     subject.getSex(),
                     subject.getShelterId(),
-                    dateFormat.parse(subject.getWalkTime()),
-                    subject.getWalkCount());
+                    DATE_FORMAT.parse(subject.getWalkTime()),
+                    subject.getWalkPeriod());
         } catch (ParseException e) {
             e.printStackTrace();
         }

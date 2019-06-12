@@ -2,6 +2,7 @@ package com.jeka.golub.shelter.persistence.shelter_database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -30,6 +31,7 @@ public class VolunteerEntity {
         this.lastName = lastName;
     }
 
+    @Ignore
     public VolunteerEntity(String firstName, String lastName) {
         this.id = 0L;
         this.firstName = firstName;

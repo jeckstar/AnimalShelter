@@ -1,20 +1,36 @@
 package com.example.android.animalshelter.view.home.create_shelter;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android.animalshelter.R;
+import com.example.android.animalshelter.ShelterApplication;
+import com.example.android.animalshelter.view.home.create_shelter.presenter.CreateShelterCardPresenter;
+import com.example.android.animalshelter.view.home.create_shelter.presenter.ICreateShelterCardPresenter;
+import com.example.android.animalshelter.view.home.create_shelter.view.CreateShelterCardView;
 
-public class CreateShelterCard extends Fragment {
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+public class CreateShelterCard extends Fragment implements CreateShelterEventConsumer {
+
+    private ICreateShelterCardPresenter presenter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_shelter_card, container, false);
+        final CreateShelterCardView view = new CreateShelterCardView(inflater, container, savedInstanceState, this);
+        presenter = new CreateShelterCardPresenter(
+                view,
+                ((ShelterApplication) getActivity().getApplication()).getRepositoryFactory().getShelterRepository()
+        );
+        presenter.onCreate();
+        return view.getAndroidView();
     }
 
+    @Override
+    public void onSaveClick(String name, String address, String phone) {
+        presenter.onSaveCardClicked(name, address, phone);
+    }
 }

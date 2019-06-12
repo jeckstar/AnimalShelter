@@ -26,7 +26,7 @@ public abstract class ShelterDatabase extends RoomDatabase {
 
     private static ShelterDatabase instance;
 
-    private ShelterDatabase() {
+    protected ShelterDatabase() {
     }
 
     private static final String FILE_NAME = "shelter.db";
