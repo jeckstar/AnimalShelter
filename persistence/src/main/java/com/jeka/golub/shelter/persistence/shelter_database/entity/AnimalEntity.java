@@ -39,15 +39,24 @@ public class AnimalEntity {
     @ColumnInfo(name = AGE)
     private final String age;
     @ColumnInfo(name = SEX)
-    private final String sex;
+    private final int sex;
     @ColumnInfo(name = SHELTER_ID)
     private final long shelterId;
     @ColumnInfo(name = WALK_TIME)
-    private final long walkTime;
+    private final String walkTime;
     @ColumnInfo(name = WALK_PERIOD)
     private final long walkPeriod;
 
-    public AnimalEntity(long id, String kind, String name, String age, String sex, long shelterId, long walkTime, long walkPeriod) {
+    public AnimalEntity(
+            long id,
+            String kind,
+            String name,
+            String age,
+            int sex,
+            long shelterId,
+            String walkTime,
+            long walkPeriod
+    ) {
         this.id = id;
         this.kind = kind;
         this.name = name;
@@ -58,7 +67,15 @@ public class AnimalEntity {
         this.walkPeriod = walkPeriod;
     }
 
-    public AnimalEntity(String kind, String name, String age, String sex, long shelterId, long walkTime, long walkPeriod) {
+    public AnimalEntity(
+            String kind,
+            String name,
+            String age,
+            int sex,
+            long shelterId,
+            String walkTime,
+            long walkPeriod
+    ) {
         this.id = 0L;
         this.kind = kind;
         this.name = name;
@@ -85,7 +102,7 @@ public class AnimalEntity {
         return age;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
@@ -93,7 +110,7 @@ public class AnimalEntity {
         return shelterId;
     }
 
-    public long getWalkTime() {
+    public String getWalkTime() {
         return walkTime;
     }
 
