@@ -10,7 +10,7 @@ import com.example.android.animalshelter.view.home.create_animal.presenter.ICrea
 
 import androidx.fragment.app.Fragment;
 
-public class CreateAnimalCard extends Fragment {
+public class CreateAnimalCardFragment extends Fragment {
 
     private ICreateAnimalCardPresenter presenter;
 

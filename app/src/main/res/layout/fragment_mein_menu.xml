@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/orangeFE"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.home.main_screen.main_menu_fragment.MainMenu">
+    tools:context=".view.home.main_screen.main_menu_fragment.MainMenuFragment">
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="choose shelter"
+        android:text="@string/choose_shelter"
         app:layout_constraintBottom_toTopOf="@+id/btn_home_screen_new_shelter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,29 +35,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="new shelter"
-        app:layout_constraintBottom_toTopOf="@+id/btn_home_screen_new_animal"
+        android:text="@string/new_shelter"
+        app:layout_constraintBottom_toTopOf="@+id/btn_home_screen_new_volunteer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btn_home_screen_new_animal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="new animal"
-        app:layout_constraintBottom_toTopOf="@+id/btn_home_screen_new_volunteer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/btn_home_screen_new_volunteer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="new volunteer"
+        android:text="@string/new_volunteer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"

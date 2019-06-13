@@ -10,10 +10,12 @@ import com.example.android.animalshelter.view.home.create_shelter.presenter.Crea
 import com.example.android.animalshelter.view.home.create_shelter.presenter.ICreateShelterCardPresenter;
 import com.example.android.animalshelter.view.home.create_shelter.view.CreateShelterCardView;
 
+import java.util.concurrent.Executors;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-public class CreateShelterCard extends Fragment implements CreateShelterEventConsumer {
+public class CreateShelterCardFragment extends Fragment implements CreateShelterEventConsumer {
 
     private ICreateShelterCardPresenter presenter;
 
@@ -23,8 +25,8 @@ public class CreateShelterCard extends Fragment implements CreateShelterEventCon
         final CreateShelterCardView view = new CreateShelterCardView(inflater, container, savedInstanceState, this);
         presenter = new CreateShelterCardPresenter(
                 view,
-                ((ShelterApplication) getActivity().getApplication()).getRepositoryFactory().getShelterRepository()
-        );
+                ((ShelterApplication) getActivity().getApplication()).getRepositoryFactory().getShelterRepository(),
+                Executors.newCachedThreadPool());
         presenter.onCreate();
         return view.getAndroidView();
     }

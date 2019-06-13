@@ -9,7 +9,7 @@ import com.example.android.animalshelter.R;
 
 import androidx.fragment.app.Fragment;
 
-public class CreateVolunteerCard extends Fragment {
+public class CreateVolunteerCardFragment extends Fragment {
 
 
     @Override

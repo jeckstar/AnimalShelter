@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green36"
-    tools:context=".view.home.create_shelter.CreateShelterCard">
+    tools:context=".view.home.create_shelter.CreateShelterCardFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Shelter createing card"
+        android:text="@string/shelter_createing_card"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
             android:id="@+id/et_shelter_card_shelter_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Edit phone number" />
+            android:hint="@string/edit_phone_number" />
     </LinearLayout>
 
     <Button
