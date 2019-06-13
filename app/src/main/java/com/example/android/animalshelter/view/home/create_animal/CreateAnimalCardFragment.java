@@ -18,6 +18,8 @@ public class CreateAnimalCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Bundle bundle = this.getArguments();
+        long myInt = bundle.getLong("shelter_id");
 
 
         return inflater.inflate(R.layout.fragment_create_animal_card, container, false);

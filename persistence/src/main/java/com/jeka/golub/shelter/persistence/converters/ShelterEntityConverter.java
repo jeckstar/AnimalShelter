@@ -19,7 +19,8 @@ public class ShelterEntityConverter implements Converter<ShelterEntity, Shelter>
                 subject.getId(),
                 subject.getTitle(),
                 subject.getAddress(),
-                subject.getPhoneNumber());
+                subject.getPhoneNumber(),
+                animals);
     }
 
 }

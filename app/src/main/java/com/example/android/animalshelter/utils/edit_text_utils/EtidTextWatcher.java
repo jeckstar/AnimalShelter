@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.edit_text_utils;
+package com.example.android.animalshelter.utils.edit_text_utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;

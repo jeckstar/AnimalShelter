@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.animalshelter.R;
-import com.example.android.animalshelter.edit_text_utils.EtidTextWatcher;
+import com.example.android.animalshelter.utils.edit_text_utils.EtidTextWatcher;
 import com.example.android.animalshelter.view.home.create_shelter.CreateShelterEventConsumer;
 
 import androidx.annotation.NonNull;

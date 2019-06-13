@@ -2,9 +2,7 @@ package com.example.android.animalshelter.view.home.shelter_list.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 
-import com.example.android.animalshelter.backbone.Singles;
 import com.example.android.animalshelter.view.home.shelter_list.view.IChoosingShelterView;
 import com.jeka.golub.shelter.domain.Shelter;
 import com.jeka.golub.shelter.domain.repositories.ShelterRepository;

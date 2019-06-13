@@ -9,7 +9,6 @@ public class Animal {
     private final String name;
     private final int sex;
     private final int age;
-    private final long shelterId;
     private final Date lastWalkTime;
     private final long walkPeriod;
 
@@ -19,7 +18,6 @@ public class Animal {
             String name,
             int age,
             int sex,
-            long shelterId,
             Date lastWalkTime,
             long walkPeriod
     ) {
@@ -28,7 +26,6 @@ public class Animal {
         this.name = name;
         this.age = age;
         this.sex = sex;
-        this.shelterId = shelterId;
         this.lastWalkTime = lastWalkTime;
         this.walkPeriod = walkPeriod;
     }
@@ -38,7 +35,6 @@ public class Animal {
             String name,
             int age,
             int sex,
-            long shelterId,
             long walkPeriod
             ) {
         this.id = 0L;
@@ -47,7 +43,6 @@ public class Animal {
         this.sex = sex;
         this.lastWalkTime = null;
         this.age = age;
-        this.shelterId = shelterId;
         this.walkPeriod = walkPeriod;
     }
 
@@ -73,10 +68,6 @@ public class Animal {
 
     public int getAge() {
         return age;
-    }
-
-    public long getShelterId() {
-        return shelterId;
     }
 
     public long getWalkPeriod() {

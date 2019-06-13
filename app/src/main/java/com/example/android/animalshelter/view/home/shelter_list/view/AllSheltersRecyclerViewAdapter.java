@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.example.android.animalshelter.R;
+import com.example.android.animalshelter.utils.IOnItemClickListener;
 import com.jeka.golub.shelter.domain.Shelter;
 
 import java.util.List;
@@ -16,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class AllSheltersRecyclerViewAdapter extends RecyclerView.Adapter<AllSheltersRecyclerViewAdapter.ShelterViewHolder> {
     private final List<Shelter> models;
-    private final View.OnClickListener onChooseListener;
+    private final IOnItemClickListener<Shelter> onChooseListener;
 
-    public AllSheltersRecyclerViewAdapter(List<Shelter> models, View.OnClickListener onChooseListener) {
+    public AllSheltersRecyclerViewAdapter(List<Shelter> models, IOnItemClickListener<Shelter> onChooseListener) {
         this.models = models;
         this.onChooseListener = onChooseListener;
     }
@@ -60,12 +61,12 @@ class AllSheltersRecyclerViewAdapter extends RecyclerView.Adapter<AllSheltersRec
             vCard = itemView;
         }
 
-        void bind(Shelter model, View.OnClickListener onChooseListener) {
+        void bind(Shelter model, IOnItemClickListener<Shelter> onChooseListener) {
             id.setText(String.valueOf(model.getId()));
             title.setText(model.getAddress());
             address.setText(model.getAddress());
             phone.setText(model.getPhoneNumber());
-            vCard.setOnClickListener(v -> onChooseListener.onClick(vCard));
+            vCard.setOnClickListener(v -> onChooseListener.onClick(model));
         }
     }
 }
