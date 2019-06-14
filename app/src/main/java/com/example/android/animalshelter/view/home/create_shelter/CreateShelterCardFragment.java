@@ -27,7 +27,6 @@ public class CreateShelterCardFragment extends Fragment implements CreateShelter
                 view,
                 ((ShelterApplication) getActivity().getApplication()).getRepositoryFactory().getShelterRepository(),
                 Executors.newCachedThreadPool());
-        presenter.onCreate();
         return view.getAndroidView();
     }
 

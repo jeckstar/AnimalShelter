@@ -4,8 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.view.IChoosingShelterView;
-import com.jeka.golub.shelter.domain.Shelter;
-import com.jeka.golub.shelter.domain.repositories.ShelterRepository;
+import com.jeka.golub.shelter.domain.shelter.Shelter;
+import com.jeka.golub.shelter.domain.shelter.ShelterRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;

@@ -1,7 +1,7 @@
 package com.jeka.golub.shelter.persistence;
 
-import com.jeka.golub.shelter.domain.repositories.AnimalRepository;
-import com.jeka.golub.shelter.domain.repositories.ShelterRepository;
+import com.jeka.golub.shelter.domain.animal.AnimalRepository;
+import com.jeka.golub.shelter.domain.shelter.ShelterRepository;
 
 public interface RepositoryAbstractFactory {
 

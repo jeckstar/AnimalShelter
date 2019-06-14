@@ -27,7 +27,15 @@ public class CreateAnimalCardView implements ICreateAnimalCardView {
     private final Spinner sWalkPeriod;
     private final Button btnSave;
 
-    private int genderAnimal = 0;
+    public static final int GENDER_FEMALE = 0;
+    public static final int GENDER_MALE = 1;
+    public static final int GENDER_UNKNOWN = 2;
+
+    private static final int WALK_PERIOD_ONE_HR = 1;
+    private static final int WALK_PERIOD_TWO_HR = 2;
+    private static final int WALK_PERIOD_THREE_HR = 3;
+
+    private int genderAnimal = GENDER_FEMALE;
     private int walkPeriod = 1;
 
 
@@ -83,11 +91,11 @@ public class CreateAnimalCardView implements ICreateAnimalCardView {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
                     if (selection.equals(rootView.getResources().getString(R.string.gender_female))) {
-                        genderAnimal = 0;
+                        genderAnimal = GENDER_FEMALE;
                     } else if (selection.equals(rootView.getResources().getString(R.string.gender_male))) {
-                        genderAnimal = 1;
+                        genderAnimal = GENDER_MALE;
                     } else {
-                        genderAnimal = 2;
+                        genderAnimal = GENDER_UNKNOWN;
                     }
                 }
             }
@@ -114,11 +122,11 @@ public class CreateAnimalCardView implements ICreateAnimalCardView {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
                     if (selection.equals(rootView.getResources().getString(R.string.period_1))) {
-                        walkPeriod = 1;
+                        walkPeriod = WALK_PERIOD_ONE_HR;
                     } else if (selection.equals(rootView.getResources().getString(R.string.period_2))) {
-                        walkPeriod = 2;
+                        walkPeriod = WALK_PERIOD_TWO_HR;
                     } else {
-                        walkPeriod = 3;
+                        walkPeriod = WALK_PERIOD_THREE_HR;
                     }
                 }
             }

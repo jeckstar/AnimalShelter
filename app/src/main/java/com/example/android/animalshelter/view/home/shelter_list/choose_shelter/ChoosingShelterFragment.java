@@ -46,11 +46,8 @@ public class ChoosingShelterFragment extends Fragment {
     }
 
     public void launchToShelterCardScreen(long id) {
+        ShelterCardMenuFragment shelterCardMenuFragment = ShelterCardMenuFragment.newInstance(id);
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        ShelterCardMenuFragment shelterCardMenuFragment = new ShelterCardMenuFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong("shelter_id", id);
-        shelterCardMenuFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, shelterCardMenuFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

@@ -2,7 +2,7 @@ package com.example.android.animalshelter.view.home.shelter_list.shelter_card_me
 
 import android.view.View;
 
-import com.jeka.golub.shelter.domain.Animal;
+import com.jeka.golub.shelter.domain.animal.Animal;
 
 import java.util.List;
 

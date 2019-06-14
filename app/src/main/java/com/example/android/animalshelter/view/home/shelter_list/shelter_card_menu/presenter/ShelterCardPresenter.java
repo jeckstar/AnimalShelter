@@ -4,8 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.IShelterCardView;
-import com.jeka.golub.shelter.domain.Animal;
-import com.jeka.golub.shelter.domain.repositories.AnimalRepository;
+import com.jeka.golub.shelter.domain.animal.Animal;
+import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -32,7 +32,7 @@ public class ShelterCardPresenter implements IShelterCardPresenter {
     @Override
     public void onShowAllAnimalsForCurrentShelter() {
         executor.execute(() -> {
-            final List<Animal> animals = animalRepository.getAllForCurrentShelter(currentShelter);
+            final List<Animal> animals = animalRepository.getByShelterId(currentShelter);
             new Handler(Looper.getMainLooper()).post(() -> view.updateAnimalList(animals));
         });
     }

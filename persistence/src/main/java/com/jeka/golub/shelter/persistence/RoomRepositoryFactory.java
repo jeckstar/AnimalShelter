@@ -2,11 +2,12 @@ package com.jeka.golub.shelter.persistence;
 
 import android.content.Context;
 
-import com.jeka.golub.shelter.domain.repositories.AnimalRepository;
-import com.jeka.golub.shelter.domain.repositories.ShelterRepository;
-import com.jeka.golub.shelter.persistence.converters.AnimalEntityConverter;
-import com.jeka.golub.shelter.persistence.converters.ShelterEntityConverter;
-import com.jeka.golub.shelter.persistence.shelter_database.ShelterDatabase;
+import com.jeka.golub.shelter.domain.animal.AnimalRepository;
+import com.jeka.golub.shelter.domain.shelter.ShelterRepository;
+import com.jeka.golub.shelter.persistence.animal.AnimalEntityConverter;
+import com.jeka.golub.shelter.persistence.animal.SQLiteAnimalRepository;
+import com.jeka.golub.shelter.persistence.shelter.SQLiteShelterRepository;
+import com.jeka.golub.shelter.persistence.shelter.ShelterEntityConverter;
 
 public class RoomRepositoryFactory implements RepositoryAbstractFactory {
 

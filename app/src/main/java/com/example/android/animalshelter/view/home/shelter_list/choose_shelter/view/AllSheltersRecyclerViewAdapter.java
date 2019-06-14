@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.utils.IOnItemClickListener;
-import com.jeka.golub.shelter.domain.Shelter;
+import com.jeka.golub.shelter.domain.shelter.Shelter;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ class AllSheltersRecyclerViewAdapter extends RecyclerView.Adapter<AllSheltersRec
 
     @Override
     public int getItemCount() {
-       return models.size();
+        return models.size();
     }
 
     static class ShelterViewHolder extends RecyclerView.ViewHolder {

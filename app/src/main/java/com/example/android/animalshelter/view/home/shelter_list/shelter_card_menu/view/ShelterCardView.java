@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.utils.IOnItemClickListener;
-import com.jeka.golub.shelter.domain.Animal;
+import com.jeka.golub.shelter.domain.animal.Animal;
 
 import java.util.ArrayList;
 import java.util.List;

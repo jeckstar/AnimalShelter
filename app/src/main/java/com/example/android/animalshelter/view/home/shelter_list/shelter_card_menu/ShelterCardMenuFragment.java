@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class ShelterCardMenuFragment extends Fragment {
 
+    public static final String KEY_SHELTER_ID = "shelter_id";
     private IShelterCardPresenter presenter;
 
     @Override
@@ -58,6 +59,14 @@ public class ShelterCardMenuFragment extends Fragment {
         fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, createAnimalCardFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public static ShelterCardMenuFragment newInstance(final long shelterId) {
+        Bundle args = new Bundle();
+        args.putLong(KEY_SHELTER_ID, shelterId);
+        ShelterCardMenuFragment fragment = new ShelterCardMenuFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 }
