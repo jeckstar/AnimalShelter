@@ -46,7 +46,7 @@ public class AnimalEntity {
     @ColumnInfo(name = WALK_TIME)
     private final String walkTime;
     @ColumnInfo(name = WALK_PERIOD)
-    private final long walkPeriod;
+    private final int walkPeriod;
 
     public AnimalEntity(
             long id,
@@ -56,7 +56,7 @@ public class AnimalEntity {
             int sex,
             long shelterId,
             String walkTime,
-            long walkPeriod
+            int walkPeriod
     ) {
         this.id = id;
         this.kind = kind;
@@ -76,7 +76,7 @@ public class AnimalEntity {
             int sex,
             long shelterId,
             String walkTime,
-            long walkPeriod
+            int walkPeriod
     ) {
         this.id = 0L;
         this.kind = kind;
@@ -116,7 +116,7 @@ public class AnimalEntity {
         return walkTime;
     }
 
-    public long getWalkPeriod() {
+    public int getWalkPeriod() {
         return walkPeriod;
     }
 }

@@ -13,6 +13,11 @@ public class VolunteerEntityConverter implements Converter<VolunteerEntity, Volu
     }
 
     @Override
+    public VolunteerEntity convertForward(Volunteer subject, long shelterId) {
+        return null;
+    }
+
+    @Override
     public Volunteer convertReverse(VolunteerEntity subject) {
         return new Volunteer(
                 subject.getId(),

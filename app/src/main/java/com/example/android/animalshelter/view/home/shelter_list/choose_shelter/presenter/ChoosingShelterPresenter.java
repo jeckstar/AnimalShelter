@@ -1,9 +1,9 @@
-package com.example.android.animalshelter.view.home.shelter_list.presenter;
+package com.example.android.animalshelter.view.home.shelter_list.choose_shelter.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.android.animalshelter.view.home.shelter_list.view.IChoosingShelterView;
+import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.view.IChoosingShelterView;
 import com.jeka.golub.shelter.domain.Shelter;
 import com.jeka.golub.shelter.domain.repositories.ShelterRepository;
 

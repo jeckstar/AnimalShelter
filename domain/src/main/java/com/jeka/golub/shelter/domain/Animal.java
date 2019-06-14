@@ -1,5 +1,6 @@
 package com.jeka.golub.shelter.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Animal {
@@ -10,7 +11,10 @@ public class Animal {
     private final int sex;
     private final int age;
     private final Date lastWalkTime;
-    private final long walkPeriod;
+    private final int walkPeriod;
+    private final Date ANIMAL_NOW_WALKED_YET = new Date(1000);
+
+
 
     public Animal(
             long id,
@@ -19,7 +23,7 @@ public class Animal {
             int age,
             int sex,
             Date lastWalkTime,
-            long walkPeriod
+            int walkPeriod
     ) {
         this.id = id;
         this.kind = kind;
@@ -35,13 +39,13 @@ public class Animal {
             String name,
             int age,
             int sex,
-            long walkPeriod
+            int walkPeriod
             ) {
         this.id = 0L;
         this.kind = kind;
         this.name = name;
         this.sex = sex;
-        this.lastWalkTime = null;
+        this.lastWalkTime = ANIMAL_NOW_WALKED_YET;
         this.age = age;
         this.walkPeriod = walkPeriod;
     }
@@ -70,7 +74,7 @@ public class Animal {
         return age;
     }
 
-    public long getWalkPeriod() {
+    public int getWalkPeriod() {
         return walkPeriod;
     }
 }

@@ -4,6 +4,7 @@ import com.example.android.animalshelter.view.home.create_shelter.view.ICreateSh
 import com.jeka.golub.shelter.domain.Shelter;
 import com.jeka.golub.shelter.domain.repositories.ShelterRepository;
 
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
 public class CreateShelterCardPresenter implements ICreateShelterCardPresenter {
@@ -27,7 +28,7 @@ public class CreateShelterCardPresenter implements ICreateShelterCardPresenter {
     @Override
     public void onSaveCardClicked(String title, String address, String phoneNumber) {
         executor.execute(()->{
-            Shelter shelter = new Shelter(title, address, phoneNumber);
+            Shelter shelter = new Shelter(title, address, phoneNumber, new ArrayList<>());
             shelterRepositories.add(shelter);
         });
         view.showThatShelterWasCreatedSuccessfully();

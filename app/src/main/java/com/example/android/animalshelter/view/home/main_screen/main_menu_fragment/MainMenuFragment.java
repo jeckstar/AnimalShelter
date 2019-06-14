@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.view.home.careate_volunteer.CreateVolunteerCardFragment;
 import com.example.android.animalshelter.view.home.create_shelter.CreateShelterCardFragment;
-import com.example.android.animalshelter.view.home.shelter_list.ChoosingShelterFragment;
+import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ChoosingShelterFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;

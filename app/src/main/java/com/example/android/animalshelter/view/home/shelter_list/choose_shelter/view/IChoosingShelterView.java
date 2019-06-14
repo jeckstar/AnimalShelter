@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.shelter_list.view;
+package com.example.android.animalshelter.view.home.shelter_list.choose_shelter.view;
 
 import android.view.View;
 

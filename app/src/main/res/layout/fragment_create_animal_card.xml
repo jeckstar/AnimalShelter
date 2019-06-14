@@ -30,6 +30,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:hint="@string/enter_kind"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -45,17 +47,22 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/enter_name"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_kind" />
 
-    <TextView
+    <EditText
         android:id="@+id/et_animal_card_animal_age"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:hint="@string/enter_age"
+        android:inputType="number"
+        android:maxLines="1"
+        android:singleLine="true"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/et_animal_card_animal_name"
         app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_name" />
@@ -87,14 +94,8 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_animal_card_animal_walk_periodic"
-        app:layout_constraintTop_toBottomOf="@+id/et_animal_card_animal_name">
+        app:layout_constraintTop_toTopOf="@+id/et_animal_card_animal_sex">
 
-        <Spinner
-            android:id="@+id/spinner_animal_card_age"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:paddingRight="16dp"
-            android:spinnerMode="dropdown" />
 
         <Spinner
             android:id="@+id/spinner_animal_card_sex"
@@ -116,6 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:enabled="false"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="16dp" />

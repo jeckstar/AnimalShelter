@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.shelter_list.view;
+package com.example.android.animalshelter.view.home.shelter_list.choose_shelter.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.utils.IOnItemClickListener;
-import com.example.android.animalshelter.view.home.shelter_list.ChoosingShelterEventConsumer;
 import com.jeka.golub.shelter.domain.Shelter;
 
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ public class ChoosingShelterView implements IChoosingShelterView {
 
     public ChoosingShelterView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                                final Bundle savedInstanceState,
-                               final ChoosingShelterEventConsumer consumer,
                                IOnItemClickListener<Shelter> chooseShelterListener) {
         rootView = inflater.inflate(R.layout.fragment_choosing_shelter, container, false);
 

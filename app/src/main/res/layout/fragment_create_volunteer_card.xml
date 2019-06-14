@@ -34,13 +34,17 @@
             android:id="@+id/et_volunteer_card_shelter_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_first_name" />
+            android:hint="@string/enter_first_name"
+            android:maxLines="1"
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/et_volunteer_card_shelter_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_last_name" />
+            android:hint="@string/enter_last_name"
+            android:maxLines="1"
+            android:singleLine="true" />
     </LinearLayout>
 
     <Button

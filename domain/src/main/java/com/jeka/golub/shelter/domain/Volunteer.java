@@ -1,19 +1,19 @@
 package com.jeka.golub.shelter.domain;
 
-import com.jeka.golub.shelter.domain.repositories.IWalkRepository;
+import com.jeka.golub.shelter.domain.repositories.WalkRepository;
 
 import java.util.Date;
 
 public class Volunteer {
 
-    private final IWalkRepository walkRepository;
+    private final WalkRepository walkRepository;
 
     private final long id;
     private final String firstName;
     private final String lastName;
 
     public Volunteer(
-            IWalkRepository walkRepository,
+            WalkRepository walkRepository,
             long id,
             String firstName,
             String lastName
@@ -35,7 +35,7 @@ public class Volunteer {
         this.walkRepository = null;
     }
 
-    public Volunteer(IWalkRepository walkRepository,
+    public Volunteer(WalkRepository walkRepository,
                      String firstName,
                      String lastName
     ) {

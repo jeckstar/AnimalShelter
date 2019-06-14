@@ -18,6 +18,9 @@ public interface AnimalDao {
     @Query("SELECT * FROM " + TABLE_NAME)
     List<AnimalEntity> getAll();
 
+    @Query("SELECT * FROM " + TABLE_NAME + " WHERE shelter_id = :id")
+    List<AnimalEntity> getAllByShelterId(long id);
+
     @Query("SELECT * FROM " + TABLE_NAME + " WHERE id = :id")
     AnimalEntity getById(long id);
 

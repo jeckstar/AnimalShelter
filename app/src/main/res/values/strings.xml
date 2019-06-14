@@ -10,16 +10,16 @@
     <string name="enter_kind">Enter kind</string>
     <string name="enter_name">Enter name</string>
     <string name="enter_age">Enter age</string>
-    <string name="enter_sex">Enter sex</string>
+    <string name="enter_sex">Enter gender</string>
     <string name="enter_walk_periodic">Enter walk periodic</string>
     <string name="animal_registration_card">Animal registration card</string>
     <string name="shelter_createing_card">Shelter createing card</string>
     <string name="volunteer_registration_card">Volunteer registration card</string>
     <string name="enter_first_name">Enter first name</string>
     <string name="enter_last_name">Enter last name</string>
-    <string name="shelter_createing_card">Shelter createing card</string>
     <string name="edit_phone_number">Edit phone number</string>
     <string name="choose_shelter">choose shelter</string>
     <string name="new_shelter">new shelter</string>
     <string name="new_volunteer">new volunteer</string>
+    <string name="animal_has_not_walked">The animal has not walked</string>
 </resources>

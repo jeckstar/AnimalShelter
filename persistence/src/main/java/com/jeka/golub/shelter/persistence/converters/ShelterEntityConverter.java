@@ -14,13 +14,18 @@ public class ShelterEntityConverter implements Converter<ShelterEntity, Shelter>
     }
 
     @Override
+    public ShelterEntity convertForward(Shelter subject, long shelterId) {
+        return null;
+    }
+
+    @Override
     public Shelter convertReverse(ShelterEntity subject) {
         return new Shelter(
                 subject.getId(),
                 subject.getTitle(),
                 subject.getAddress(),
                 subject.getPhoneNumber(),
-                animals);
+                null);
     }
 
 }

@@ -14,6 +14,11 @@ public class WalkEntityConverter implements Converter<WalkEntity, WalkingAnimal>
     }
 
     @Override
+    public WalkEntity convertForward(WalkingAnimal subject, long shelterId) {
+        return null;
+    }
+
+    @Override
     public WalkingAnimal convertReverse(WalkEntity subject) {
         return new WalkingAnimal(
                 subject.getId(),

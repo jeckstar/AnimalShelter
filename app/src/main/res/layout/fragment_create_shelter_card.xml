@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange"
+        android:background="@color/new_red_indicator_2"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,17 +34,23 @@
             android:id="@+id/et_shelter_card_shelter_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
             android:hint="@string/enter_shelter_title" />
 
         <EditText
             android:id="@+id/et_shelter_card_shelter_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
             android:hint="@string/edit_address" />
 
         <EditText
             android:id="@+id/et_shelter_card_shelter_phone_number"
             android:layout_width="match_parent"
+            android:singleLine="true"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:hint="@string/edit_phone_number" />
     </LinearLayout>

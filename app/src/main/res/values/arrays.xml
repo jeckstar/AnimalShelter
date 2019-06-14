@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gender_female">female</string>
+    <string name="gender_male">male</string>
+    <string name="gender_unknown">unknown</string>
+
+    <string-array name="array_gender_options">
+        <item>@string/gender_unknown</item>
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+    </string-array>
+
+    <string name="period_1">one hr</string>
+    <string name="period_2">two hr</string>
+    <string name="period_3">three hr</string>
+
+    <string-array name="array_period_options">
+        <item>@string/period_1</item>
+        <item>@string/period_2</item>
+        <item>@string/period_3</item>
+    </string-array>
+
+</resources>
