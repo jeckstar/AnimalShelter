@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:id="@+id/cl_animal_card_animal"
+    android:background="@color/greyC2"
+    android:clickable="true"
+    android:focusable="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+
+    <TextView
+        android:id="@+id/tv_item_animal_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:hint="1"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_item_animal_kind"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_id"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_id"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_id"
+        tools:text="kind" />
+
+    <TextView
+        android:id="@+id/tv_item_animal_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_kind"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_kind"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_kind"
+        tools:text="name" />
+
+    <TextView
+        android:id="@+id/tv_item_animal_age"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_name"
+        tools:text="age" />
+
+    <TextView
+        android:id="@+id/tv_item_animal_sex"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_age"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_age"
+        tools:text="sex" />
+
+
+    <TextView
+        android:id="@+id/tv_item_animal_last_walk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_id"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_animal_kind"
+        tools:text="last walk" />
+
+
+    <TextView
+        android:id="@+id/tv_item_animal_walk_period"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_sex"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_sex"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_sex"
+        tools:text="period" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
