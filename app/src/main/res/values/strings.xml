@@ -22,4 +22,5 @@
     <string name="new_shelter">new shelter</string>
     <string name="new_volunteer">new volunteer</string>
     <string name="animal_has_not_walked">The animal has not walked</string>
+    <string name="list_is_empty">List is empty</string>
 </resources>

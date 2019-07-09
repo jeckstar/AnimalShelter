@@ -1,28 +1,22 @@
 package com.jeka.golub.shelter.domain.volunteer;
 
 import com.jeka.golub.shelter.domain.animal.Animal;
-import com.jeka.golub.shelter.domain.walk.WalkRepository;
 
 import java.util.Date;
 
 public class Volunteer {
-
-    private final WalkRepository walkRepository;
 
     private final long id;
     private final String firstName;
     private final String lastName;
 
     public Volunteer(
-            WalkRepository walkRepository,
-            long id,
             String firstName,
             String lastName
     ) {
-        this.id = id;
+        this.id = 0L;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.walkRepository = walkRepository;
     }
 
     public Volunteer(
@@ -33,17 +27,6 @@ public class Volunteer {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.walkRepository = null;
-    }
-
-    public Volunteer(WalkRepository walkRepository,
-                     String firstName,
-                     String lastName
-    ) {
-        this.id = 0L;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.walkRepository = walkRepository;
     }
 
 
