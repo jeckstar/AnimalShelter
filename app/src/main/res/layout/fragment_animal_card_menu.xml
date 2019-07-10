@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment">
+
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_kind_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/kind"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_title" />
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/name"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_animal_menu_animal_kind_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_animal_kind_title" />
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_last_walk_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/last_walk_time"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_animal_menu_animal_name_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_animal_name_title" />
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_walk_periodic_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/period_of_walk"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_animal_menu_animal_last_walk_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_animal_last_walk_title" />
+
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_kind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_animal_menu_animal_kind_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_title"
+        tools:text="kind" />
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_animal_menu_animal_name_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_animal_kind"
+        tools:text="name" />
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_last_walk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_animal_menu_animal_last_walk_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_animal_name"
+        tools:text="last_walk" />
+
+    <TextView
+        android:id="@+id/tv_animal_menu_animal_walk_periodic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_animal_menu_animal_walk_periodic_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_animal_last_walk"
+        tools:text="periodic_kind" />
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tv_animal_menu_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grayDark41"
+        android:gravity="center"
+        android:text="@string/animal_menu"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_animal_card_screen_volunteers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_animal_menu_animal_walk_periodic"
+        tools:itemCount="7"
+        tools:listitem="@layout/item_volunteer" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.shelter_list.choose_shelter.view;
+package com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,18 +8,19 @@ import android.widget.TextView;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.utils.IOnItemClickListener;
-import com.jeka.golub.shelter.domain.shelter.Shelter;
+import com.jeka.golub.shelter.domain.animal.Animal;
+import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-class AllSheltersRecyclerViewAdapter extends RecyclerView.Adapter<AllSheltersRecyclerViewAdapter.ShelterViewHolder> {
-    private final List<Shelter> models;
-    private final IOnItemClickListener<Shelter> onChooseListener;
+public class AllVolunteerRecyclerViewAdapter extends RecyclerView.Adapter<AllVolunteerRecyclerViewAdapter.ShelterViewHolder> {
+    private final List<Volunteer> models;
+    private final IOnItemClickListener<Volunteer> onChooseListener;
 
-    public AllSheltersRecyclerViewAdapter(List<Shelter> models, IOnItemClickListener<Shelter> onChooseListener) {
+    public AllVolunteerRecyclerViewAdapter(List<Volunteer> models, IOnItemClickListener<Volunteer> onChooseListener) {
         this.models = models;
         this.onChooseListener = onChooseListener;
     }
@@ -29,7 +30,7 @@ class AllSheltersRecyclerViewAdapter extends RecyclerView.Adapter<AllSheltersRec
     public ShelterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ShelterViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_shelter, parent, false)) {
+                        .inflate(R.layout.item_volunteer, parent, false)) {
         };
     }
 
@@ -46,26 +47,23 @@ class AllSheltersRecyclerViewAdapter extends RecyclerView.Adapter<AllSheltersRec
 
     static class ShelterViewHolder extends RecyclerView.ViewHolder {
         private final TextView id;
-        private final TextView title;
-        private final TextView address;
-        private final TextView phone;
+        private final TextView name;
+        private final TextView lastName;
         private final View vCard;
 
 
         public ShelterViewHolder(@NonNull View itemView) {
             super(itemView);
-            id = itemView.findViewById(R.id.tv_item_shelter_id);
-            title = itemView.findViewById(R.id.tv_item_shelter_title);
-            address = itemView.findViewById(R.id.tv_item_shelter_address);
-            phone = itemView.findViewById(R.id.tv_item_shelter_phone);
-            vCard = itemView;
+            id = itemView.findViewById(R.id.tv_item_volunteer_id);
+            name = itemView.findViewById(R.id.tv_item_volunteer_name);
+            lastName = itemView.findViewById(R.id.tv_item_volunteer_last_name);
+            vCard = itemView.findViewById(R.id.cl_volunteer_card_volunteer);
         }
 
-        void bind(Shelter model, IOnItemClickListener<Shelter> onChooseListener) {
+        void bind(Volunteer model, IOnItemClickListener<Volunteer> onChooseListener) {
             id.setText(String.valueOf(model.getId()));
-            title.setText(model.getTitle());
-            address.setText(model.getAddress());
-            phone.setText(model.getPhoneNumber());
+            name.setText(String.valueOf(model.getFirstName()));
+            lastName.setText(String.valueOf(model.getLastName()));
             vCard.setOnClickListener(v -> onChooseListener.onClick(model));
         }
     }

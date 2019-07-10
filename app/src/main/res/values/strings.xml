@@ -23,4 +23,9 @@
     <string name="new_volunteer">new volunteer</string>
     <string name="animal_has_not_walked">The animal has not walked</string>
     <string name="list_is_empty">List is empty</string>
+    <string name="animal_menu">Animal menu</string>
+    <string name="kind">Kind:</string>
+    <string name="name">Name:</string>
+    <string name="last_walk_time">Last walk time:</string>
+    <string name="period_of_walk">Period of walk:</string>
 </resources>

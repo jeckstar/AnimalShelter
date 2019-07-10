@@ -7,6 +7,8 @@ public interface AnimalRepository {
 
     List<Animal> getAll();
 
+    Animal getById(long animalId);
+
     List<Animal> getByShelterId(long shelterId);
 
 }

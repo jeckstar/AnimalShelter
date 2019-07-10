@@ -50,7 +50,6 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
     }
 
     static class ShelterViewHolder extends RecyclerView.ViewHolder {
-        private final TextView id;
         private final TextView kind;
         private final TextView name;
         private final TextView age;
@@ -64,7 +63,6 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
 
         public ShelterViewHolder(@NonNull View itemView) {
             super(itemView);
-            id = itemView.findViewById(R.id.tv_item_animal_id);
             kind = itemView.findViewById(R.id.tv_item_animal_kind);
             name = itemView.findViewById(R.id.tv_item_animal_name);
             age = itemView.findViewById(R.id.tv_item_animal_age);
@@ -76,7 +74,6 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
         }
 
         void bind(Animal model, IOnItemClickListener<Animal> onChooseListener) {
-            id.setText(String.valueOf(model.getId()));
             kind.setText(model.getKind());
             name.setText(model.getName());
             age.setText(String.format("%s year(s)", String.valueOf(model.getAge())));

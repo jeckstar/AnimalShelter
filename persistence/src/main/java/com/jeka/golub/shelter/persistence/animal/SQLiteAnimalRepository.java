@@ -33,6 +33,12 @@ public class SQLiteAnimalRepository implements AnimalRepository {
     }
 
     @Override
+    public Animal getById(long animalId) {
+        AnimalEntity animalEntity = dao.getById(animalId);
+        return animalEntityConverter.convertReverse(animalEntity);
+    }
+
+    @Override
     public List<Animal> getByShelterId(long shelterId) {
         final List<Animal> animals = new ArrayList<>();
 
