@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green36"
-    tools:context=".view.home.careate_volunteer.CreateVolunteerCardFragment">
+    tools:context=".view.home.create_volunteer.CreateVolunteerCardFragment">
 
     <TextView
         android:id="@+id/tv_volunteer_card_title"

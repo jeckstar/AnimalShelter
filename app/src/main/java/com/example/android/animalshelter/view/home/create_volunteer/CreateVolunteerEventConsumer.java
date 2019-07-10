@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.careate_volunteer;
+package com.example.android.animalshelter.view.home.create_volunteer;
 
 public interface CreateVolunteerEventConsumer {
 
