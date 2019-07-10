@@ -1,25 +1,25 @@
 package com.jeka.golub.shelter.persistence.walk;
 
-import com.jeka.golub.shelter.domain.walk.WalkingAnimal;
+import com.jeka.golub.shelter.domain.walk.Walk;
 
 public class WalkEntityConverter {
-    public WalkEntity convertForward(WalkingAnimal subject) {
+    public WalkEntity convertForward(Walk subject) {
         return new WalkEntity(
                 subject.getAnimalId(),
-                subject.getShelterId(),
+                subject.getVolunteerId(),
                 subject.getWalkTime()
         );
     }
 
-    public WalkEntity convertForward(WalkingAnimal subject, long shelterId) {
+    public WalkEntity convertForward(Walk subject, long shelterId) {
         return null;
     }
 
-    public WalkingAnimal convertReverse(WalkEntity subject) {
-        return new WalkingAnimal(
+    public Walk convertReverse(WalkEntity subject) {
+        return new Walk(
                 subject.getId(),
                 subject.getAnimalId(),
-                subject.getShelterId(),
+                subject.getVolunteerId(),
                 subject.getWalkTime()
         );
     }

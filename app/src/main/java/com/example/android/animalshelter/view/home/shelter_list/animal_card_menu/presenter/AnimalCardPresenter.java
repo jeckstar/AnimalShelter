@@ -8,6 +8,8 @@ import com.jeka.golub.shelter.domain.animal.Animal;
 import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
+import com.jeka.golub.shelter.domain.walk.Walk;
+import com.jeka.golub.shelter.exeptions.WalkException;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -58,6 +60,10 @@ public class AnimalCardPresenter implements IAnimalCardPresenter{
 
     @Override
     public void onTakeAnimalForAWalk(Volunteer volunteer) {
-        volunteer.takeToTheWalk(currentAnimal);
+        try {
+            final Walk walk = volunteer.takeToTheWalk(currentAnimal);
+        } catch (WalkException e){
+            view.showWarningMassage();
+        }
     }
 }

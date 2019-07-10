@@ -15,4 +15,6 @@ public interface IAnimalCardView {
     void updateVolunteerList(List<Volunteer> volunteers);
 
     void showSelectedAnimal(String kind, String name, Date lastWalkTime, int walkPeriod);
+
+    void showWarningMassage();
 }

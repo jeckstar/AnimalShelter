@@ -1,23 +1,23 @@
 package com.jeka.golub.shelter.domain.walk;
 
-public class WalkingAnimal {
+public class Walk {
 
     private final long id;
     private final long animalId;
-    private final long shelterId;
+    private final long volunteerId;
     private final long walkTime;
 
-    public WalkingAnimal(long id, long animalId, long shelterId, long walkTime) {
+    public Walk(long id, long animalId, long volunteerId, long walkTime) {
         this.id = id;
         this.animalId = animalId;
-        this.shelterId = shelterId;
+        this.volunteerId = volunteerId;
         this.walkTime = walkTime;
     }
 
-    public WalkingAnimal(long animalId, long shelterId, long walkTime) {
+    public Walk(long animalId, long volunteerId, long walkTime) {
         this.id = 0L;
         this.animalId = animalId;
-        this.shelterId = shelterId;
+        this.volunteerId = volunteerId;
         this.walkTime = walkTime;
     }
 
@@ -29,8 +29,8 @@ public class WalkingAnimal {
         return animalId;
     }
 
-    public long getShelterId() {
-        return shelterId;
+    public long getVolunteerId() {
+        return volunteerId;
     }
 
     public long getWalkTime() {

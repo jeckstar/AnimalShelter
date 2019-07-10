@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.utils.IOnItemClickListener;
@@ -76,5 +77,15 @@ public class AnimalCardView implements IAnimalCardView {
                         rootView.getResources().getString(R.string.animal_has_not_walked) :
                         DATE_FORMAT.format(lastWalkTime));
         tvPeriodic.setText(String.valueOf(walkPeriod));
+    }
+
+    @Override
+    public void showWarningMassage() {
+        Toast
+                .makeText(
+                        rootView.getContext().getApplicationContext(),
+                        "Ups! It is not time to walk yet.",
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 }
