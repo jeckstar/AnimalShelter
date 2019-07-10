@@ -11,7 +11,7 @@ import static com.jeka.golub.shelter.domain.animal.Animal.NOT_WALKED_YET;
 
 public class AnimalEntityConverter {
 
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
 
     public AnimalEntity convertForward(Animal subject) {
         return new AnimalEntity(subject.getId(),

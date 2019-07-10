@@ -11,6 +11,7 @@ import com.example.android.animalshelter.utils.IOnItemClickListener;
 import com.jeka.golub.shelter.domain.animal.Animal;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,7 @@ import static com.example.android.animalshelter.view.home.create_animal.view.Cre
 import static com.example.android.animalshelter.view.home.create_animal.view.CreateAnimalCardView.GENDER_MALE;
 import static com.example.android.animalshelter.view.home.create_animal.view.CreateAnimalCardView.GENDER_UNKNOWN;
 
-public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnimalsRecyclerViewAdapter.ShelterViewHolder> {
+public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnimalsRecyclerViewAdapter.AnimalViewHolder> {
     private final List<Animal> models;
     private final IOnItemClickListener<Animal> onChooseListener;
 
@@ -31,15 +32,15 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
 
     @NonNull
     @Override
-    public AllAnimalsRecyclerViewAdapter.ShelterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AllAnimalsRecyclerViewAdapter.ShelterViewHolder(
+    public AnimalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new AnimalViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_animal, parent, false)) {
         };
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllAnimalsRecyclerViewAdapter.ShelterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AnimalViewHolder holder, int position) {
         holder.bind(models.get(position), onChooseListener);
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), android.R.anim.fade_in));
     }
@@ -49,7 +50,7 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
         return models.size();
     }
 
-    static class ShelterViewHolder extends RecyclerView.ViewHolder {
+    static class AnimalViewHolder extends RecyclerView.ViewHolder {
         private final TextView kind;
         private final TextView name;
         private final TextView age;
@@ -57,11 +58,14 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
         private final TextView period;
         private final TextView lastWalk;
         private final View vCard;
+        private final int walkingBackground;
+        private final int unlockedBackground;
+        private final int restBackground;
 
-        private SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+        private SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
 
 
-        public ShelterViewHolder(@NonNull View itemView) {
+        public AnimalViewHolder(@NonNull View itemView) {
             super(itemView);
             kind = itemView.findViewById(R.id.tv_item_animal_kind);
             name = itemView.findViewById(R.id.tv_item_animal_name);
@@ -70,7 +74,9 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
             period = itemView.findViewById(R.id.tv_item_animal_walk_period);
             lastWalk = itemView.findViewById(R.id.tv_item_animal_last_walk);
             vCard = itemView.findViewById(R.id.cl_animal_card_animal);
-
+            walkingBackground = vCard.getResources().getColor(R.color.redDE);
+            unlockedBackground = vCard.getResources().getColor(R.color.green00B);
+            restBackground = vCard.getResources().getColor(R.color.chocolate);
         }
 
         void bind(Animal model, IOnItemClickListener<Animal> onChooseListener) {
@@ -89,9 +95,60 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
                     break;
             }
             period.setText(String.format("%shr", String.valueOf(model.getWalkPeriod())));
-            lastWalk.setText(model.getLastWalkTime() ==
-                    Animal.DEFAULT_LAST_WALK_TIME ? vCard.getResources().getString(R.string.animal_has_not_walked) : DATE_FORMAT.format(model.getLastWalkTime()));
-            vCard.setOnClickListener(v -> onChooseListener.onClick(model));
+            // ready to walk
+            if (model.getLastWalkTime() == Animal.DEFAULT_LAST_WALK_TIME ||
+                    (model.getLastWalkTime().getTime()
+                            + hourToMillisecond(model.getWalkPeriod())
+                            + hourToMillisecond(model.getWalkPeriod())) < (new Date().getTime())) {
+                vCard.setBackgroundColor(unlockedBackground);
+                lastWalk.setText(model.getLastWalkTime() ==
+                        Animal.DEFAULT_LAST_WALK_TIME ? vCard.getResources().getString(R.string.animal_has_not_walked) : DATE_FORMAT.format(model.getLastWalkTime()));
+                vCard.setOnClickListener(v -> onChooseListener.onClick(model));
+            }
+            // locked to walk - walking now
+            else if ((model.getLastWalkTime().getTime() + hourToMillisecond(model.getWalkPeriod())) > new Date().getTime()) {
+                vCard.setBackgroundColor(walkingBackground);
+                lastWalk.setText(lockedMassage(model));
+            }
+            // walked not so long ago
+            else if ((model.getLastWalkTime().getTime() + hourToMillisecond(model.getWalkPeriod())) < new Date().getTime()
+                    && new Date().getTime() < (new Date().getTime()) + hourToMillisecond(model.getWalkPeriod())) {
+                vCard.setBackgroundColor(restBackground);
+                lastWalk.setText(restMassage(model));
+            }
+        }
+
+        private String lockedMassage(Animal model) {
+            return String.format("%s is walking now. Walk will end %s.",
+                    model.getName(),
+                    String.valueOf(
+                            DATE_FORMAT.format(
+                                    new Date(
+                                            model.getLastWalkTime().getTime() + hourToMillisecond(model.getWalkPeriod())
+                                    )
+                            )
+                    )
+            );
+        }
+
+        private String restMassage(Animal model) {
+            return String.format("%s walked not so long ago. Walk will unlocked %s.",
+                    model.getName(),
+                    String.valueOf(
+                            DATE_FORMAT.format(
+                                    new Date(
+                                            model.getLastWalkTime().getTime()
+                                                    + hourToMillisecond(model.getWalkPeriod())
+                                                    + hourToMillisecond(model.getWalkPeriod()
+                                            )
+                                    )
+                            )
+                    )
+            );
+        }
+
+        private long hourToMillisecond(int walkPeriod) {
+            return walkPeriod * 60 * 60 * 1000;
         }
     }
 }
