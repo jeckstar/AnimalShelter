@@ -9,24 +9,34 @@ import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 import com.jeka.golub.shelter.domain.walk.Walk;
+import com.jeka.golub.shelter.domain.walk.WalkRepository;
 import com.jeka.golub.shelter.exeptions.WalkException;
 
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class AnimalCardPresenter implements IAnimalCardPresenter{
+public class AnimalCardPresenter implements IAnimalCardPresenter {
     private final IAnimalCardView view;
     private final VolunteerRepository volunteerRepository;
     private final AnimalRepository animalRepository;
+    private final WalkRepository walkRepository;
     private final Executor executor;
     private final long currentAnimalId;
     private Animal currentAnimal;
 
 
-    public AnimalCardPresenter(IAnimalCardView view, VolunteerRepository volunteerRepository, AnimalRepository animalRepository, Executor executor, long currentAnimal) {
+    public AnimalCardPresenter(
+            IAnimalCardView view,
+            VolunteerRepository volunteerRepository,
+            AnimalRepository animalRepository,
+            WalkRepository walkRepository,
+            Executor executor,
+            long currentAnimal
+    ) {
         this.view = view;
         this.volunteerRepository = volunteerRepository;
         this.animalRepository = animalRepository;
+        this.walkRepository = walkRepository;
         this.executor = executor;
         this.currentAnimalId = currentAnimal;
     }
@@ -60,10 +70,14 @@ public class AnimalCardPresenter implements IAnimalCardPresenter{
 
     @Override
     public void onTakeAnimalForAWalk(Volunteer volunteer) {
-        try {
-            final Walk walk = volunteer.takeToTheWalk(currentAnimal);
-        } catch (WalkException e){
-            view.showWarningMassage();
-        }
+        executor.execute(() -> {
+            try {
+                final Walk walk = volunteer.takeToTheWalk(currentAnimal);
+                walkRepository.add(walk);
+                new Handler(Looper.getMainLooper()).post(view::showThatVolunteerTakeAnimalForAWalkSuccessfully);
+            } catch (WalkException e) {
+                view.showWarningMassage();
+            }
+        });
     }
 }

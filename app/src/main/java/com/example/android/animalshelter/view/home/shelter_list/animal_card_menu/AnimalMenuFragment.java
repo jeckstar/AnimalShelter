@@ -48,6 +48,10 @@ public class AnimalMenuFragment extends Fragment {
                         .getApplication())
                         .getRepositoryFactory()
                         .getAnimalRepository(),
+                ((ShelterApplication) getActivity()
+                        .getApplication())
+                        .getRepositoryFactory()
+                        .getWalkRepository(),
                 Executors.newCachedThreadPool(),
                 animalId);
         presenter.onCreate();

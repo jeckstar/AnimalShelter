@@ -88,4 +88,14 @@ public class AnimalCardView implements IAnimalCardView {
                         Toast.LENGTH_SHORT)
                 .show();
     }
+
+    @Override
+    public void showThatVolunteerTakeAnimalForAWalkSuccessfully() {
+        Toast
+                .makeText(
+                        rootView.getContext().getApplicationContext(),
+                        "Walking is started",
+                        Toast.LENGTH_SHORT)
+                .show();
+    }
 }
