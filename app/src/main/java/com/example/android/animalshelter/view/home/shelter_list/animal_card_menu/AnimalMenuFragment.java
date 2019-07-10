@@ -35,11 +35,12 @@ public class AnimalMenuFragment extends Fragment {
                         inflater,
                         container,
                         savedInstanceState,
-                        new IOnItemClickListener<Volunteer>() {
-                            @Override
-                            public void onClick(Volunteer volunteer) {
-                                Toast.makeText(AnimalMenuFragment.this.getContext().getApplicationContext(), volunteer.getFirstName() + " started walk with this animal", Toast.LENGTH_SHORT).show();
-                            }
+                        volunteer -> {
+                            presenter.onTakeAnimalForAWalk(volunteer);
+                            Toast.makeText(
+                                    AnimalMenuFragment.this.getContext().getApplicationContext(),
+                                    volunteer.getFirstName() + " started walk with this animal",
+                                    Toast.LENGTH_SHORT).show();
                         });
         presenter = new AnimalCardPresenter(
                 view,
