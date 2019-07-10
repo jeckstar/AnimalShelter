@@ -95,7 +95,6 @@
         tools:text="periodic_kind" />
 
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/tv_animal_menu_title"
         android:layout_width="match_parent"
