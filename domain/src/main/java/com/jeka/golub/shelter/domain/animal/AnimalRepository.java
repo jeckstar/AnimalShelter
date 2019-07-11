@@ -11,4 +11,5 @@ public interface AnimalRepository {
 
     List<Animal> getByShelterId(long shelterId);
 
+    void update(Animal animal, long shelterId);
 }

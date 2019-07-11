@@ -7,14 +7,12 @@ import android.view.ViewGroup;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.ShelterApplication;
-import com.example.android.animalshelter.utils.IOnItemClickListener;
 import com.example.android.animalshelter.view.home.create_animal.CreateAnimalCardFragment;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.AnimalMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.presenter.IShelterCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.presenter.ShelterCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.IShelterCardView;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.ShelterCardView;
-import com.jeka.golub.shelter.domain.animal.Animal;
 
 import java.util.concurrent.Executors;
 
@@ -38,7 +36,7 @@ public class ShelterCardMenuFragment extends Fragment {
                         inflater,
                         container,
                         savedInstanceState,
-                        animal -> ShelterCardMenuFragment.this.launchToCreateAnimalMenuScreen(animal.getId()));
+                        animal -> ShelterCardMenuFragment.this.launchToCreateAnimalMenuScreen(animal.getId(),shelterId));
         presenter = new ShelterCardPresenter(
                 view,
                 ((ShelterApplication) getActivity()
@@ -52,11 +50,12 @@ public class ShelterCardMenuFragment extends Fragment {
         return view.getAndroidView();
     }
 
-    private void launchToCreateAnimalMenuScreen(long id) {
+    private void launchToCreateAnimalMenuScreen(long animalId, long shelterId) {
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         AnimalMenuFragment animalMenuFragment = new AnimalMenuFragment();
         Bundle bundle = new Bundle();
-        bundle.putLong(KEY_ANIMAL_ID, id);
+        bundle.putLong(KEY_ANIMAL_ID, animalId);
+        bundle.putLong(KEY_SHELTER_ID, shelterId);
         animalMenuFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, animalMenuFragment);
         fragmentTransaction.addToBackStack(null);

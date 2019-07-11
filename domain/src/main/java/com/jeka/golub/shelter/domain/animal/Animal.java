@@ -9,8 +9,8 @@ public class Animal {
     private final String name;
     private final int sex;
     private final int age;
-    private final Date lastWalkTime;
     private final int walkPeriod;
+    private Date lastWalkTime;
 
     public static final Date DEFAULT_LAST_WALK_TIME = new Date(1000);
     public static final String NOT_WALKED_YET = "not_walked_yet";
@@ -62,6 +62,10 @@ public class Animal {
 
     public Date getLastWalkTime() {
         return lastWalkTime;
+    }
+
+    public void setLastWalkTime(Date lastWalkTime) {
+        this.lastWalkTime = lastWalkTime;
     }
 
     public int getAge() {

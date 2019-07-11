@@ -32,12 +32,13 @@ public class Volunteer {
     }
 
 
-    public Walk takeToTheWalk(final Animal animal) {
+    public Walk takeToTheWalk(final Animal animal, Date now) {
         if (animal.getLastWalkTime() == Animal.DEFAULT_LAST_WALK_TIME ||
                 (animal.getLastWalkTime().getTime()
                         + hourToMillisecond(animal.getWalkPeriod())
-                        + hourToMillisecond(animal.getWalkPeriod())) < (new Date().getTime())
+                        + hourToMillisecond(animal.getWalkPeriod())) < (now.getTime())
         ) {
+            animal.setLastWalkTime(now);
             return new Walk(animal, this);
         } else {
             throw new WalkException("It is not time to walk yet.");

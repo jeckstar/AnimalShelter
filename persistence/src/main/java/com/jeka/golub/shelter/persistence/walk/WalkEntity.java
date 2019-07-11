@@ -1,16 +1,30 @@
 package com.jeka.golub.shelter.persistence.walk;
 
+import com.jeka.golub.shelter.persistence.animal.AnimalEntity;
+import com.jeka.golub.shelter.persistence.volunteer.VolunteerEntity;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import static com.jeka.golub.shelter.persistence.walk.WalkEntity.ANIMAL_ID;
 import static com.jeka.golub.shelter.persistence.walk.WalkEntity.TABLE_NAME;
-import static com.jeka.golub.shelter.persistence.walk.WalkEntity.VOLUNTEER_ID;
 
-@Entity(tableName = TABLE_NAME, indices = {@Index(value = {ANIMAL_ID, VOLUNTEER_ID}, unique = true)})
+@Entity(tableName = TABLE_NAME,
+        foreignKeys =
+                {
+                        @ForeignKey(
+                                entity = AnimalEntity.class,
+                                parentColumns = {AnimalEntity.ID},
+                                childColumns = {WalkEntity.ANIMAL_ID}
+                        ),
+                        @ForeignKey(
+                                entity = VolunteerEntity.class,
+                                parentColumns = {VolunteerEntity.ID},
+                                childColumns = {WalkEntity.VOLUNTEER_ID}
+                        ),
+                })
 public class WalkEntity {
 
     public static final String TABLE_NAME = "walk_status";
@@ -27,9 +41,9 @@ public class WalkEntity {
     @ColumnInfo(name = VOLUNTEER_ID)
     private final long volunteerId;
     @ColumnInfo(name = WALK_TIME)
-    private final long walkTime;
+    private final String walkTime;
 
-    public WalkEntity(long id, long animalId, long volunteerId, long walkTime) {
+    public WalkEntity(long id, long animalId, long volunteerId, String walkTime) {
         this.id = id;
         this.animalId = animalId;
         this.volunteerId = volunteerId;
@@ -37,11 +51,8 @@ public class WalkEntity {
     }
 
     @Ignore
-    public WalkEntity(long animalId, long volunteerId, long walkTime) {
-        this.id = 0L;
-        this.animalId = animalId;
-        this.volunteerId = volunteerId;
-        this.walkTime = walkTime;
+    public WalkEntity(long animalId, long volunteerId, String walkTime) {
+        this(0L, animalId, volunteerId, walkTime);
     }
 
     public long getId() {
@@ -56,7 +67,7 @@ public class WalkEntity {
         return volunteerId;
     }
 
-    public long getWalkTime() {
+    public String getWalkTime() {
         return walkTime;
     }
 }

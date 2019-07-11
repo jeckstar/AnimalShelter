@@ -48,4 +48,10 @@ public class SQLiteAnimalRepository implements AnimalRepository {
             animals.add(animalEntityConverter.convertReverse(aEntity));
         }
         return animals;    }
+
+    @Override
+    public void update(Animal animal,  long shelterId) {
+        final AnimalEntity animalEntity = animalEntityConverter.convertForward(animal, shelterId);
+        dao.update(animalEntity);
+    }
 }

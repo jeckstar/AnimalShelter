@@ -26,8 +26,9 @@ public class AnimalEntityConverter {
     }
 
     public AnimalEntity convertForward(Animal subject, long shelterId) {
-        String lastWalkTime = subject.getLastWalkTime() == DEFAULT_LAST_WALK_TIME ? NOT_WALKED_YET : DATE_FORMAT.format(subject.getLastWalkTime());
-        return new AnimalEntity(0L,
+        final String lastWalkTime = subject.getLastWalkTime() == DEFAULT_LAST_WALK_TIME ? NOT_WALKED_YET : DATE_FORMAT.format(subject.getLastWalkTime());
+        final long id = subject.getId() == 0 ? 0L : subject.getId();
+        return new AnimalEntity(id,
                 subject.getKind(),
                 subject.getName(),
                 subject.getAge(),

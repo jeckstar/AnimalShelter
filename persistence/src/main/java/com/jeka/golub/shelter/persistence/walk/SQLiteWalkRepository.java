@@ -24,8 +24,8 @@ public class SQLiteWalkRepository implements WalkRepository {
 
     @Override
     public List<Walk> getAll() {
-        final List<Walk> walks = new ArrayList<>();
         final List<WalkEntity> walkEntities = dao.getAll();
+        final List<Walk> walks = new ArrayList<>(walkEntities.size());
         for (WalkEntity wEntity : walkEntities) {
             walks.add(walkEntityConverter.convertReverse(wEntity));
         }

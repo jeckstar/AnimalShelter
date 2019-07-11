@@ -80,14 +80,7 @@ public class AnimalEntity {
             String walkTime,
             int walkPeriod
     ) {
-        this.id = 0L;
-        this.kind = kind;
-        this.name = name;
-        this.age = age;
-        this.sex = sex;
-        this.shelterId = shelterId;
-        this.walkTime = walkTime;
-        this.walkPeriod = walkPeriod;
+        this(0L, kind, name, age, sex, shelterId, walkTime, walkPeriod);
     }
 
     public long getId() {

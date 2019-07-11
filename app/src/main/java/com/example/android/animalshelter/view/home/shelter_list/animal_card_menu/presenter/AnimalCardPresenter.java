@@ -12,6 +12,7 @@ import com.jeka.golub.shelter.domain.walk.Walk;
 import com.jeka.golub.shelter.domain.walk.WalkRepository;
 import com.jeka.golub.shelter.exeptions.WalkException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -22,6 +23,7 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
     private final WalkRepository walkRepository;
     private final Executor executor;
     private final long currentAnimalId;
+    private final long shelterId;
     private Animal currentAnimal;
 
 
@@ -31,14 +33,15 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
             AnimalRepository animalRepository,
             WalkRepository walkRepository,
             Executor executor,
-            long currentAnimal
-    ) {
+            long currentAnimal,
+            long shelterId) {
         this.view = view;
         this.volunteerRepository = volunteerRepository;
         this.animalRepository = animalRepository;
         this.walkRepository = walkRepository;
         this.executor = executor;
         this.currentAnimalId = currentAnimal;
+        this.shelterId = shelterId;
     }
 
     @Override
@@ -72,11 +75,18 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
     public void onTakeAnimalForAWalk(Volunteer volunteer) {
         executor.execute(() -> {
             try {
-                final Walk walk = volunteer.takeToTheWalk(currentAnimal);
+                final Date now = new Date();
+                final Walk walk = volunteer.takeToTheWalk(currentAnimal, now);
+                currentAnimal.setLastWalkTime(now);
                 walkRepository.add(walk);
-                new Handler(Looper.getMainLooper()).post(view::showThatVolunteerTakeAnimalForAWalkSuccessfully);
+                animalRepository.update(currentAnimal, shelterId);
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    view.showThatVolunteerTakeAnimalForAWalkSuccessfully();
+                    onShowSelectedAnimal();
+                });
             } catch (WalkException e) {
-                view.showWarningMassage();
+                e.printStackTrace();
+                new Handler(Looper.getMainLooper()).post(view::showWarningMassage);
             }
         });
     }
