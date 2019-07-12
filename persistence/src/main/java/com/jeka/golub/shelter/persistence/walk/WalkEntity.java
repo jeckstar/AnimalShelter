@@ -29,7 +29,7 @@ public class WalkEntity {
 
     public static final String TABLE_NAME = "walk_status";
     public static final String ID = "id";
-    public static final String ANIMAL_ID = "kind";
+    public static final String ANIMAL_ID = "animal_Id";
     public static final String VOLUNTEER_ID = "volunteer_id";
     public static final String WALK_TIME = "walk_time";
 
@@ -41,9 +41,9 @@ public class WalkEntity {
     @ColumnInfo(name = VOLUNTEER_ID)
     private final long volunteerId;
     @ColumnInfo(name = WALK_TIME)
-    private final String walkTime;
+    private final long walkTime;
 
-    public WalkEntity(long id, long animalId, long volunteerId, String walkTime) {
+    public WalkEntity(long id, long animalId, long volunteerId, long walkTime) {
         this.id = id;
         this.animalId = animalId;
         this.volunteerId = volunteerId;
@@ -51,7 +51,7 @@ public class WalkEntity {
     }
 
     @Ignore
-    public WalkEntity(long animalId, long volunteerId, String walkTime) {
+    public WalkEntity(long animalId, long volunteerId, long walkTime) {
         this(0L, animalId, volunteerId, walkTime);
     }
 
@@ -67,7 +67,7 @@ public class WalkEntity {
         return volunteerId;
     }
 
-    public String getWalkTime() {
+    public long getWalkTime() {
         return walkTime;
     }
 }

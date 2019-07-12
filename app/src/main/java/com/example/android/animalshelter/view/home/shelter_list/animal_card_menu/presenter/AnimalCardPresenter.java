@@ -46,14 +46,14 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
 
     @Override
     public void onCreate() {
-        onShowAllVolunteetsForCurrentShelter();
+        onShowAllVolunteersForCurrentShelter();
         onShowSelectedAnimal();
     }
 
     @Override
-    public void onShowAllVolunteetsForCurrentShelter() {
+    public void onShowAllVolunteersForCurrentShelter() {
         executor.execute(() -> {
-            final List<Volunteer> volunteers = volunteerRepository.getAll();
+            final List<Volunteer> volunteers = volunteerRepository.getAvailableVolunteers();
             new Handler(Looper.getMainLooper()).post(() -> view.updateVolunteerList(volunteers));
         });
     }
@@ -83,6 +83,7 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     view.showThatVolunteerTakeAnimalForAWalkSuccessfully();
                     onShowSelectedAnimal();
+                    onShowAllVolunteersForCurrentShelter();
                 });
             } catch (WalkException e) {
                 e.printStackTrace();

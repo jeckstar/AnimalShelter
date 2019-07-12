@@ -46,7 +46,7 @@ public class AnimalEntity {
     @ColumnInfo(name = SHELTER_ID)
     private final long shelterId;
     @ColumnInfo(name = WALK_TIME)
-    private final String walkTime;
+    private final long walkTime;
     @ColumnInfo(name = WALK_PERIOD)
     private final int walkPeriod;
 
@@ -57,7 +57,7 @@ public class AnimalEntity {
             int age,
             int sex,
             long shelterId,
-            String walkTime,
+            long walkTime,
             int walkPeriod
     ) {
         this.id = id;
@@ -77,7 +77,7 @@ public class AnimalEntity {
             int age,
             int sex,
             long shelterId,
-            String walkTime,
+            long walkTime,
             int walkPeriod
     ) {
         this(0L, kind, name, age, sex, shelterId, walkTime, walkPeriod);
@@ -107,7 +107,7 @@ public class AnimalEntity {
         return shelterId;
     }
 
-    public String getWalkTime() {
+    public long getWalkTime() {
         return walkTime;
     }
 

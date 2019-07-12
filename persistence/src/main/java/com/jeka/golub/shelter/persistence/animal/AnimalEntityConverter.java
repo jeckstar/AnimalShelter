@@ -20,13 +20,13 @@ public class AnimalEntityConverter {
                 subject.getAge(),
                 subject.getSex(),
                 0L,
-                DATE_FORMAT.format(subject.getLastWalkTime()),
+                subject.getLastWalkTime().getTime(),
                 subject.getWalkPeriod()
         );
     }
 
     public AnimalEntity convertForward(Animal subject, long shelterId) {
-        final String lastWalkTime = subject.getLastWalkTime() == DEFAULT_LAST_WALK_TIME ? NOT_WALKED_YET : DATE_FORMAT.format(subject.getLastWalkTime());
+        final long lastWalkTime = subject.getLastWalkTime() == DEFAULT_LAST_WALK_TIME ? NOT_WALKED_YET : subject.getLastWalkTime().getTime();
         final long id = subject.getId() == 0 ? 0L : subject.getId();
         return new AnimalEntity(id,
                 subject.getKind(),
@@ -40,8 +40,7 @@ public class AnimalEntityConverter {
     }
 
     public Animal convertReverse(AnimalEntity subject) {
-        try {
-            Date lastWalkTime = subject.getWalkTime().equals(NOT_WALKED_YET) ? DEFAULT_LAST_WALK_TIME : DATE_FORMAT.parse(subject.getWalkTime());
+            Date lastWalkTime = subject.getWalkTime() == NOT_WALKED_YET ? DEFAULT_LAST_WALK_TIME : new Date(subject.getWalkTime());
             return new Animal(subject.getId(),
                     subject.getKind(),
                     subject.getName(),
@@ -49,9 +48,5 @@ public class AnimalEntityConverter {
                     subject.getSex(),
                     lastWalkTime,
                     subject.getWalkPeriod());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
     }
 }

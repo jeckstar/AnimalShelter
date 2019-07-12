@@ -13,7 +13,7 @@ public class Animal {
     private Date lastWalkTime;
 
     public static final Date DEFAULT_LAST_WALK_TIME = new Date(1000);
-    public static final String NOT_WALKED_YET = "not_walked_yet";
+    public static final long NOT_WALKED_YET = 1000;
 
 
     public Animal(

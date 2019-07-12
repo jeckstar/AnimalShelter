@@ -5,7 +5,7 @@ import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 public interface IAnimalCardPresenter {
     void onCreate();
 
-    void onShowAllVolunteetsForCurrentShelter();
+    void onShowAllVolunteersForCurrentShelter();
 
     void onShowSelectedAnimal();
 
