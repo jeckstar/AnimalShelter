@@ -12,7 +12,7 @@ import static com.jeka.golub.shelter.persistence.volunteer.VolunteerEntity.TABLE
 @Entity(tableName = TABLE_NAME, indices = {@Index(value = {ID}, unique = true)})
 public class VolunteerEntity {
 
-    public static final String TABLE_NAME = "volunteers";
+    public static final String TABLE_NAME = "vulunteers";
     public static final String ID = "id";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";

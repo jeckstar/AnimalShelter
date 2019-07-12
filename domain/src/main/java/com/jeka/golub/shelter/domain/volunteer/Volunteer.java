@@ -38,8 +38,8 @@ public class Volunteer {
                         + hourToMillisecond(animal.getWalkPeriod())
                         + hourToMillisecond(animal.getWalkPeriod())) < (now.getTime())
         ) {
-            animal.setLastWalkTime(now);
-            return new Walk(animal, this);
+            final Animal walkingAnimal = animal.setLastWalkTime(now);
+            return new Walk(walkingAnimal, this);
         } else {
             throw new WalkException("It is not time to walk yet.");
         }

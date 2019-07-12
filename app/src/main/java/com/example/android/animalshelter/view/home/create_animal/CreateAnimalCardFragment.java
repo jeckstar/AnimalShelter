@@ -15,6 +15,8 @@ import java.util.concurrent.Executors;
 
 import androidx.fragment.app.Fragment;
 
+import static com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment.KEY_SHELTER_ID;
+
 
 public class CreateAnimalCardFragment extends Fragment implements CreateAnimalEventConsumer {
 
@@ -49,5 +51,13 @@ public class CreateAnimalCardFragment extends Fragment implements CreateAnimalEv
     @Override
     public void onSaveClick(String kind, String name, int age, int sex, int walkPeriod) {
         presenter.onSaveCardClicked(kind, name, age, sex, walkPeriod);
+    }
+
+    public static CreateAnimalCardFragment newInstance(long shelterId) {
+        CreateAnimalCardFragment createAnimalCardFragment = new CreateAnimalCardFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong(KEY_SHELTER_ID, shelterId);
+        createAnimalCardFragment.setArguments(bundle);
+        return createAnimalCardFragment;
     }
 }

@@ -24,7 +24,6 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
     private final Executor executor;
     private final long currentAnimalId;
     private final long shelterId;
-    private Animal currentAnimal;
 
 
     public AnimalCardPresenter(
@@ -61,7 +60,7 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
     @Override
     public void onShowSelectedAnimal() {
         executor.execute(() -> {
-            currentAnimal = animalRepository.getById(currentAnimalId);
+            final Animal currentAnimal = animalRepository.getById(currentAnimalId);
             new Handler(Looper.getMainLooper()).post(() -> view.showSelectedAnimal(
                     currentAnimal.getKind(),
                     currentAnimal.getName(),
@@ -76,10 +75,11 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
         executor.execute(() -> {
             try {
                 final Date now = new Date();
+                final Animal currentAnimal = animalRepository.getById(currentAnimalId);
                 final Walk walk = volunteer.takeToTheWalk(currentAnimal, now);
-                currentAnimal.setLastWalkTime(now);
+                final Animal updateAnimal = currentAnimal.setLastWalkTime(now);
                 walkRepository.add(walk);
-                animalRepository.update(currentAnimal, shelterId);
+                animalRepository.update(updateAnimal, shelterId);
                 new Handler(Looper.getMainLooper()).post(() -> {
                     view.showThatVolunteerTakeAnimalForAWalkSuccessfully();
                     onShowSelectedAnimal();

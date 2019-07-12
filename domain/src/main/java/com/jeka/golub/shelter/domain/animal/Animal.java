@@ -64,8 +64,16 @@ public class Animal {
         return lastWalkTime;
     }
 
-    public void setLastWalkTime(Date lastWalkTime) {
+    public Animal setLastWalkTime(Date lastWalkTime) {
         this.lastWalkTime = lastWalkTime;
+        return new Animal(this.id,
+                this.kind,
+                this.name,
+                this.age,
+                this.sex,
+                lastWalkTime,
+                this.walkPeriod
+        );
     }
 
     public int getAge() {

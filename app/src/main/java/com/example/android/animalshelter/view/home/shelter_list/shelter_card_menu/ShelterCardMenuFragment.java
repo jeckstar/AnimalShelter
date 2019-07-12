@@ -52,22 +52,15 @@ public class ShelterCardMenuFragment extends Fragment {
 
     private void launchToCreateAnimalMenuScreen(long animalId, long shelterId) {
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        AnimalMenuFragment animalMenuFragment = new AnimalMenuFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong(KEY_ANIMAL_ID, animalId);
-        bundle.putLong(KEY_SHELTER_ID, shelterId);
-        animalMenuFragment.setArguments(bundle);
+        AnimalMenuFragment animalMenuFragment = AnimalMenuFragment.newInstance(animalId, shelterId);
         fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, animalMenuFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
-    public void launchToCreateAnimalScreen(long id) {
+    public void launchToCreateAnimalScreen(long shelterId) {
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        CreateAnimalCardFragment createAnimalCardFragment = new CreateAnimalCardFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong(KEY_SHELTER_ID, id);
-        createAnimalCardFragment.setArguments(bundle);
+        CreateAnimalCardFragment createAnimalCardFragment = CreateAnimalCardFragment.newInstance(shelterId);
         fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, createAnimalCardFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

@@ -59,6 +59,15 @@ public class AnimalMenuFragment extends Fragment {
         return view.getAndroidView();
     }
 
+    public static AnimalMenuFragment newInstance(long animalId, long shelterId) {
+        AnimalMenuFragment animalMenuFragment = new AnimalMenuFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong(KEY_ANIMAL_ID, animalId);
+        bundle.putLong(KEY_SHELTER_ID, shelterId);
+        animalMenuFragment.setArguments(bundle);
+        return animalMenuFragment;
+    }
+
 }
 
 

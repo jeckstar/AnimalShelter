@@ -54,11 +54,7 @@ public class Walk {
     }
 
     public Animal getAnimal() {
-        if (animal != null) {
-            return animal;
-        } else {
-            throw new NullPointerException();
-        }
+        return animal;
     }
 
     public Volunteer getVolunteer() {
@@ -66,5 +62,6 @@ public class Walk {
             return volunteer;
         } else {
             throw new NullPointerException();
-        }    }
+        }
+    }
 }
