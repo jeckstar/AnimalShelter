@@ -14,20 +14,6 @@
     app:layout_constraintTop_toTopOf="parent">
 
 
-    <TextView
-        android:id="@+id/tv_item_animal_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:hint="1"
-        android:maxLines="1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_item_animal_kind"
@@ -38,9 +24,9 @@
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_id"
-        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_id"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_id"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="kind" />
 
     <TextView

@@ -7,4 +7,5 @@ public interface VolunteerRepository {
 
     List<Volunteer> getAll();
 
+    List<Volunteer> getAvailableVolunteers();
 }

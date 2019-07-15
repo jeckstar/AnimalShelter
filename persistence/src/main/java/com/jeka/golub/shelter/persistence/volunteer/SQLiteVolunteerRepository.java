@@ -4,6 +4,7 @@ import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SQLiteVolunteerRepository implements VolunteerRepository {
@@ -26,6 +27,17 @@ public class SQLiteVolunteerRepository implements VolunteerRepository {
     public List<Volunteer> getAll() {
         final List<Volunteer> volunteers = new ArrayList<>();
         final List<VolunteerEntity> volunteerEntity = dao.getAll();
+        for (VolunteerEntity vEntity : volunteerEntity) {
+            volunteers.add(volunteerEntityConverter.convertReverse(vEntity));
+        }
+        return volunteers;
+    }
+
+    @Override
+    public List<Volunteer> getAvailableVolunteers() {
+        final List<Volunteer> volunteers = new ArrayList<>();
+        final long now = new Date().getTime();
+        final List<VolunteerEntity> volunteerEntity = dao.getAvailable(now);
         for (VolunteerEntity vEntity : volunteerEntity) {
             volunteers.add(volunteerEntityConverter.convertReverse(vEntity));
         }

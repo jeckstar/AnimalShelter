@@ -63,7 +63,7 @@ class AllSheltersRecyclerViewAdapter extends RecyclerView.Adapter<AllSheltersRec
 
         void bind(Shelter model, IOnItemClickListener<Shelter> onChooseListener) {
             id.setText(String.valueOf(model.getId()));
-            title.setText(model.getAddress());
+            title.setText(model.getTitle());
             address.setText(model.getAddress());
             phone.setText(model.getPhoneNumber());
             vCard.setOnClickListener(v -> onChooseListener.onClick(model));

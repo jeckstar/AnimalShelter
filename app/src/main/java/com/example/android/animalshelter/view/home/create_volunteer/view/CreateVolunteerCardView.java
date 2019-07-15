@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.careate_volunteer.view;
+package com.example.android.animalshelter.view.home.create_volunteer.view;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.utils.edit_text_utils.EtidTextWatcher;
-import com.example.android.animalshelter.view.home.careate_volunteer.CreateVolunteerEventConsumer;
+import com.example.android.animalshelter.view.home.create_volunteer.CreateVolunteerEventConsumer;
 
 import androidx.annotation.NonNull;
 

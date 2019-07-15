@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.ShelterApplication;
 import com.example.android.animalshelter.view.home.create_animal.CreateAnimalCardFragment;
+import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.AnimalMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.presenter.IShelterCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.presenter.ShelterCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.IShelterCardView;
@@ -22,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class ShelterCardMenuFragment extends Fragment {
 
     public static final String KEY_SHELTER_ID = "shelter_id";
+    public static final String KEY_ANIMAL_ID = "animal_id";
     private IShelterCardPresenter presenter;
 
     @Override
@@ -34,9 +36,7 @@ public class ShelterCardMenuFragment extends Fragment {
                         inflater,
                         container,
                         savedInstanceState,
-                        animal -> {
-//                                ShelterCardMenuFragment.this.launchToCreateAnimalScreen(shelterId);
-                        });
+                        animal -> ShelterCardMenuFragment.this.launchToCreateAnimalMenuScreen(animal.getId(),shelterId));
         presenter = new ShelterCardPresenter(
                 view,
                 ((ShelterApplication) getActivity()
@@ -50,12 +50,17 @@ public class ShelterCardMenuFragment extends Fragment {
         return view.getAndroidView();
     }
 
-    public void launchToCreateAnimalScreen(long id) {
+    private void launchToCreateAnimalMenuScreen(long animalId, long shelterId) {
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        CreateAnimalCardFragment createAnimalCardFragment = new CreateAnimalCardFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong("shelter_id", id);
-        createAnimalCardFragment.setArguments(bundle);
+        AnimalMenuFragment animalMenuFragment = AnimalMenuFragment.newInstance(animalId, shelterId);
+        fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, animalMenuFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void launchToCreateAnimalScreen(long shelterId) {
+        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        CreateAnimalCardFragment createAnimalCardFragment = CreateAnimalCardFragment.newInstance(shelterId);
         fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, createAnimalCardFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

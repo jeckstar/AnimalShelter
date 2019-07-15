@@ -6,6 +6,8 @@ import android.os.Looper;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.IShelterCardView;
 import com.jeka.golub.shelter.domain.animal.Animal;
 import com.jeka.golub.shelter.domain.animal.AnimalRepository;
+import com.jeka.golub.shelter.domain.volunteer.Volunteer;
+import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;

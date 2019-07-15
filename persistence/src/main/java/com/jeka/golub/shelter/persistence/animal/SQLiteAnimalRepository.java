@@ -33,6 +33,12 @@ public class SQLiteAnimalRepository implements AnimalRepository {
     }
 
     @Override
+    public Animal getById(long animalId) {
+        AnimalEntity animalEntity = dao.getById(animalId);
+        return animalEntityConverter.convertReverse(animalEntity);
+    }
+
+    @Override
     public List<Animal> getByShelterId(long shelterId) {
         final List<Animal> animals = new ArrayList<>();
 
@@ -42,4 +48,10 @@ public class SQLiteAnimalRepository implements AnimalRepository {
             animals.add(animalEntityConverter.convertReverse(aEntity));
         }
         return animals;    }
+
+    @Override
+    public void update(Animal animal,  long shelterId) {
+        final AnimalEntity animalEntity = animalEntityConverter.convertForward(animal, shelterId);
+        dao.update(animalEntity);
+    }
 }

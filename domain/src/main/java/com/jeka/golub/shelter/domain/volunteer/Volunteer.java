@@ -1,6 +1,8 @@
 package com.jeka.golub.shelter.domain.volunteer;
 
 import com.jeka.golub.shelter.domain.animal.Animal;
+import com.jeka.golub.shelter.domain.walk.Walk;
+import com.jeka.golub.shelter.exeptions.WalkException;
 
 import java.util.Date;
 
@@ -30,12 +32,16 @@ public class Volunteer {
     }
 
 
-    public void takeToTheWalk(final Animal animal) {
-        final Date nextWalkTime = new Date(animal.getLastWalkTime().getTime() + animal.getWalkPeriod());
-        if (new Date().after(nextWalkTime)) {
-
+    public Walk takeToTheWalk(final Animal animal, Date now) {
+        if (animal.getLastWalkTime() == Animal.DEFAULT_LAST_WALK_TIME ||
+                (animal.getLastWalkTime().getTime()
+                        + hourToMillisecond(animal.getWalkPeriod())
+                        + hourToMillisecond(animal.getWalkPeriod())) < (now.getTime())
+        ) {
+            final Animal walkingAnimal = animal.setLastWalkTime(now);
+            return new Walk(walkingAnimal, this);
         } else {
-//            throw new WalkException("It is not time to walk yet");
+            throw new WalkException("It is not time to walk yet.");
         }
     }
 
@@ -50,4 +56,9 @@ public class Volunteer {
     public String getLastName() {
         return lastName;
     }
+
+    private long hourToMillisecond(int walkPeriod) {
+        return walkPeriod * 60 * 60 * 1000;
+    }
+
 }

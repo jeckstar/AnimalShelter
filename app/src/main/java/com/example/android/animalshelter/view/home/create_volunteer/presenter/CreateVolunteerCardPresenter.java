@@ -1,10 +1,10 @@
-package com.example.android.animalshelter.view.home.careate_volunteer.presenter;
+package com.example.android.animalshelter.view.home.create_volunteer.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.android.animalshelter.view.home.careate_volunteer.view.CreateVolunteerCardView;
-import com.example.android.animalshelter.view.home.careate_volunteer.view.ICreateVolunteerCardView;
+import com.example.android.animalshelter.view.home.create_volunteer.view.CreateVolunteerCardView;
+import com.example.android.animalshelter.view.home.create_volunteer.view.ICreateVolunteerCardView;
 import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 

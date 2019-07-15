@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.careate_volunteer;
+package com.example.android.animalshelter.view.home.create_volunteer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.animalshelter.ShelterApplication;
-import com.example.android.animalshelter.view.home.careate_volunteer.presenter.CreateVolunteerCardPresenter;
-import com.example.android.animalshelter.view.home.careate_volunteer.presenter.ICreateVolunteerCardPresenter;
-import com.example.android.animalshelter.view.home.careate_volunteer.view.CreateVolunteerCardView;
+import com.example.android.animalshelter.view.home.create_volunteer.presenter.CreateVolunteerCardPresenter;
+import com.example.android.animalshelter.view.home.create_volunteer.presenter.ICreateVolunteerCardPresenter;
+import com.example.android.animalshelter.view.home.create_volunteer.view.CreateVolunteerCardView;
 
 import java.util.concurrent.Executors;
 

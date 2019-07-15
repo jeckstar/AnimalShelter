@@ -5,12 +5,15 @@ import android.content.Context;
 import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 import com.jeka.golub.shelter.domain.shelter.ShelterRepository;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
+import com.jeka.golub.shelter.domain.walk.WalkRepository;
 import com.jeka.golub.shelter.persistence.animal.AnimalEntityConverter;
 import com.jeka.golub.shelter.persistence.animal.SQLiteAnimalRepository;
 import com.jeka.golub.shelter.persistence.shelter.SQLiteShelterRepository;
 import com.jeka.golub.shelter.persistence.shelter.ShelterEntityConverter;
 import com.jeka.golub.shelter.persistence.volunteer.SQLiteVolunteerRepository;
 import com.jeka.golub.shelter.persistence.volunteer.VolunteerEntityConverter;
+import com.jeka.golub.shelter.persistence.walk.SQLiteWalkRepository;
+import com.jeka.golub.shelter.persistence.walk.WalkEntityConverter;
 
 public class RoomRepositoryFactory implements RepositoryAbstractFactory {
 
@@ -33,5 +36,10 @@ public class RoomRepositoryFactory implements RepositoryAbstractFactory {
     @Override
     public VolunteerRepository getVolunteerRepository() {
         return new SQLiteVolunteerRepository(ShelterDatabase.createDatabase(context).getVolunteerDao(), new VolunteerEntityConverter());
+    }
+
+    @Override
+    public WalkRepository getWalkRepository() {
+        return new SQLiteWalkRepository(ShelterDatabase.createDatabase(context).getWalkDao(), new WalkEntityConverter());
     }
 }

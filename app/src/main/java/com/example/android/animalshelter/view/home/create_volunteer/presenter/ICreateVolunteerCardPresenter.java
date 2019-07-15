@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.careate_volunteer.presenter;
+package com.example.android.animalshelter.view.home.create_volunteer.presenter;
 
 public interface ICreateVolunteerCardPresenter {
     void onShowAllVolunteers();
