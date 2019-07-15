@@ -20,26 +20,26 @@ public interface VolunteerDao {
     List<VolunteerEntity> getAll();
 
     @Query(
-            "SELECT DISTINCT " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID + ", "
-            + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.FIRST_NAME + ", "
-            + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.LAST_NAME +
-            " FROM " + VolunteerEntity.TABLE_NAME +
-            " JOIN " + WalkEntity.TABLE_NAME +
-            " ON " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID + " = " + WalkEntity.TABLE_NAME + "." + WalkEntity.VOLUNTEER_ID +
-            " JOIN " + AnimalEntity.TABLE_NAME +
-            " ON " + WalkEntity.TABLE_NAME + "." + WalkEntity.ANIMAL_ID + " = " + AnimalEntity.TABLE_NAME + "." + AnimalEntity.ID +
-            " WHERE " + WalkEntity.TABLE_NAME + "." + WalkEntity.WALK_TIME + " + " + AnimalEntity.TABLE_NAME + "." + AnimalEntity.WALK_PERIOD +
-            " * 60 * 60 * 1000 " +
-            " < :currentTime"
-            +
-            " UNION ALL" +
-            " SELECT " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID + ", "
-            + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.FIRST_NAME + ", "
-            + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.LAST_NAME +
-            " FROM " + VolunteerEntity.TABLE_NAME +
-            " WHERE " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID +
-            " NOT IN(SELECT " + WalkEntity.VOLUNTEER_ID + " FROM " + WalkEntity.TABLE_NAME + ")" +
-            " GROUP BY " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID
+            "SELECT " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID + ", "
+                    + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.FIRST_NAME + ", "
+                    + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.LAST_NAME +
+                    " FROM " + VolunteerEntity.TABLE_NAME +
+                    " JOIN " + WalkEntity.TABLE_NAME +
+                    " ON " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID + " = " + WalkEntity.TABLE_NAME + "." + WalkEntity.VOLUNTEER_ID +
+                    " JOIN " + AnimalEntity.TABLE_NAME +
+                    " ON " + WalkEntity.TABLE_NAME + "." + WalkEntity.ANIMAL_ID + " = " + AnimalEntity.TABLE_NAME + "." + AnimalEntity.ID +
+                    " GROUP BY " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID +
+                    " HAVING MAX(" + WalkEntity.TABLE_NAME + "." + WalkEntity.WALK_TIME + ") + " + AnimalEntity.TABLE_NAME + "." + AnimalEntity.WALK_PERIOD +
+                    " * 60 * 60 * 1000 " +
+                    " < :currentTime" +
+                    " UNION ALL" +
+                    " SELECT " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID + ", "
+                    + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.FIRST_NAME + ", "
+                    + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.LAST_NAME +
+                    " FROM " + VolunteerEntity.TABLE_NAME +
+                    " WHERE " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID +
+                    " NOT IN(SELECT " + WalkEntity.VOLUNTEER_ID + " FROM " + WalkEntity.TABLE_NAME + ")" +
+                    " GROUP BY " + VolunteerEntity.TABLE_NAME + "." + VolunteerEntity.ID
     )
     List<VolunteerEntity> getAvailable(long currentTime);
 
