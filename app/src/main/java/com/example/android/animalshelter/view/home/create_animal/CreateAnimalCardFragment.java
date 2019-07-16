@@ -5,22 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android.animalshelter.ShelterApplication;
-import com.example.android.animalshelter.view.home.create_animal.presenter.CreateAnimalCardPresenter;
+import com.example.android.animalshelter.backbone.ShelterFragment;
 import com.example.android.animalshelter.view.home.create_animal.presenter.ICreateAnimalCardPresenter;
-import com.example.android.animalshelter.view.home.create_animal.view.CreateAnimalCardView;
 import com.example.android.animalshelter.view.home.create_animal.view.ICreateAnimalCardView;
 
-import java.util.concurrent.Executors;
-
-import androidx.fragment.app.Fragment;
+import javax.inject.Inject;
 
 import static com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment.KEY_SHELTER_ID;
 
 
-public class CreateAnimalCardFragment extends Fragment implements CreateAnimalEventConsumer {
+public class CreateAnimalCardFragment extends ShelterFragment implements CreateAnimalEventConsumer {
 
-    private ICreateAnimalCardPresenter presenter;
+    @Inject
+    ICreateAnimalCardPresenter presenter;
+    @Inject
+    ICreateAnimalCardView view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,22 +27,8 @@ public class CreateAnimalCardFragment extends Fragment implements CreateAnimalEv
         // Inflate the layout for this fragment
         Bundle bundle = this.getArguments();
         long shelterId = bundle.getLong("shelter_id");
-        ICreateAnimalCardView view = new CreateAnimalCardView(
-                inflater,
-                container,
-                savedInstanceState,
-                this);
-        presenter = new CreateAnimalCardPresenter(
-                view,
-                ((ShelterApplication) getActivity()
-                        .getApplication())
-                        .getRepositoryFactory()
-                        .getAnimalRepository(),
-                Executors.newCachedThreadPool(),
-                shelterId);
+        getShelterApplication().dependencyInjection().inject(this, inflater, container, savedInstanceState, this, shelterId);
         presenter.onCreate();
-
-
         return view.getAndroidView();
     }
 

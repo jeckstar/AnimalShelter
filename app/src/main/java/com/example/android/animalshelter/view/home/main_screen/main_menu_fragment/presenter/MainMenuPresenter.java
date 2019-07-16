@@ -1,6 +1,6 @@
 package com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.presenter;
 
-import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.FragmentFabric;
+import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.FragmentFactory;
 import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.ShelterFragmentNavigator;
 
 import static com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.NavigationConstants.CHOOSING_SHELTER;
@@ -9,9 +9,9 @@ import static com.example.android.animalshelter.view.home.main_screen.main_menu_
 
 public class MainMenuPresenter implements IMainMenuPresenter {
     private final ShelterFragmentNavigator navigator;
-    private final FragmentFabric fragmentFabric;
+    private final FragmentFactory fragmentFabric;
 
-    public MainMenuPresenter(ShelterFragmentNavigator navigator, FragmentFabric fragmentFabric) {
+    public MainMenuPresenter(ShelterFragmentNavigator navigator, FragmentFactory fragmentFabric) {
         this.navigator = navigator;
         this.fragmentFabric = fragmentFabric;
     }

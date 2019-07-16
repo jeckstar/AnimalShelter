@@ -6,35 +6,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.animalshelter.ShelterApplication;
+import com.example.android.animalshelter.backbone.ShelterFragment;
 import com.example.android.animalshelter.view.home.create_volunteer.presenter.CreateVolunteerCardPresenter;
 import com.example.android.animalshelter.view.home.create_volunteer.presenter.ICreateVolunteerCardPresenter;
 import com.example.android.animalshelter.view.home.create_volunteer.view.CreateVolunteerCardView;
 
 import java.util.concurrent.Executors;
 
-import androidx.fragment.app.Fragment;
+import javax.inject.Inject;
 
-public class CreateVolunteerCardFragment extends Fragment implements CreateVolunteerEventConsumer {
+public class CreateVolunteerCardFragment extends ShelterFragment implements CreateVolunteerEventConsumer {
 
-    private ICreateVolunteerCardPresenter presenter;
+    @Inject
+    ICreateVolunteerCardPresenter presenter;
+    @Inject
+    CreateVolunteerCardView view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final CreateVolunteerCardView view = new CreateVolunteerCardView(
-                inflater,
-                container,
-                savedInstanceState,
-                this);
-        presenter = new CreateVolunteerCardPresenter(
-                view,
-                ((ShelterApplication) getActivity()
-                        .getApplication())
-                        .getRepositoryFactory()
-                        .getVolunteerRepository(),
-                Executors.newCachedThreadPool());
+        getShelterApplication().dependencyInjection()
+                .inject(this, inflater, container, savedInstanceState, this);
         presenter.onShowAllVolunteers();
-        // Inflate the layout for this fragment
         return view.getAndroidView();
     }
 
