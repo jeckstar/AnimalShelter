@@ -3,19 +3,24 @@ package com.example.android.animalshelter.view.home.main_screen;
 import android.os.Bundle;
 
 import com.example.android.animalshelter.R;
+import com.example.android.animalshelter.backbone.ShelterActivity;
 import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.MainMenuFragment;
 import com.example.android.animalshelter.view.home.main_screen.presenter.IShelterHomePresenter;
 import com.example.android.animalshelter.view.home.main_screen.presenter.ShelterHomePresenter;
 import com.example.android.animalshelter.view.home.main_screen.view.IShelterHomeView;
 import com.example.android.animalshelter.view.home.main_screen.view.ShelterHomeView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import javax.inject.Inject;
+
 import androidx.fragment.app.FragmentTransaction;
 
-public class ShelterHomeScreenActivity extends AppCompatActivity {
+public class ShelterHomeScreenActivity extends ShelterActivity {
     private static final String TAG = ShelterHomeScreenActivity.class.getSimpleName();
 
-    private IShelterHomePresenter presenter;
+    @Inject
+    IShelterHomePresenter presenter;
+    @Inject
+    IShelterHomeView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +31,7 @@ public class ShelterHomeScreenActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, new MainMenuFragment());
             fragmentTransaction.commit();
         }
-        final IShelterHomeView view =
-                new ShelterHomeView(this);
-        presenter = new ShelterHomePresenter(view);
+        getShelterApplication().dependencyInjection().inject(this);
         presenter.onCreate();
     }
 
