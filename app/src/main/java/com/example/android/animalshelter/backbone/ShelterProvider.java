@@ -2,7 +2,7 @@ package com.example.android.animalshelter.backbone;
 
 import com.example.android.animalshelter.ShelterApplication;
 
-public interface ShelterBaseFrame {
+public interface ShelterProvider {
 
     ShelterApplication getShelterApplication();
 

@@ -10,7 +10,7 @@ import static com.example.android.animalshelter.view.home.main_screen.main_menu_
 import static com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.NavigationConstants.CREATE_SHELTER_CARD;
 import static com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.NavigationConstants.CREATE_VOLUNTEER_CARD;
 
-public class FragmentFabric implements IFragmentFabric {
+public class FragmentFactory implements IFragmentFabric {
 
     @Override
     public Fragment crateByName(String name) {

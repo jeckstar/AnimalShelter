@@ -6,16 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.animalshelter.R;
-import com.example.android.animalshelter.backbone.ShelterBaseFrame;
 import com.example.android.animalshelter.backbone.ShelterFragment;
-import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.FragmentFabric;
-import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model.ShelterFragmentNavigator;
 import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.presenter.IMainMenuPresenter;
-import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.presenter.MainMenuPresenter;
 
 import javax.inject.Inject;
-
-import androidx.fragment.app.Fragment;
 
 public class MainMenuFragment extends ShelterFragment {
     private static final String TAG = MainMenuFragment.class.getSimpleName();

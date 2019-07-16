@@ -4,7 +4,7 @@ import com.example.android.animalshelter.ShelterApplication;
 
 import androidx.fragment.app.Fragment;
 
-public abstract class ShelterFragment extends Fragment implements ShelterBaseFrame{
+public abstract class ShelterFragment extends Fragment implements ShelterProvider {
 
     @Override
     public ShelterApplication getShelterApplication() {
