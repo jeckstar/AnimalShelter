@@ -1,7 +1,6 @@
 package com.example.android.animalshelter.view.home.main_screen;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.backbone.ShelterActivity;
@@ -13,8 +12,6 @@ import com.example.android.animalshelter.view.home.main_screen.view.IShelterHome
 import javax.inject.Inject;
 
 import androidx.fragment.app.FragmentTransaction;
-
-import static com.example.android.animalshelter.view.home.main_screen.presenter.ShelterHomePresenter.COPIOUI;
 
 public class ShelterHomeScreenActivity extends ShelterActivity {
     private static final String TAG = ShelterHomeScreenActivity.class.getSimpleName();
@@ -38,7 +35,6 @@ public class ShelterHomeScreenActivity extends ShelterActivity {
         getShelterApplication().dependencyInjection().inject(this);
         this.view = factory.createView(this);
         presenter.attachView(view);
-        Toast.makeText(getShelterApplication().getApplicationContext(), COPIOUI + " PRESENTER", Toast.LENGTH_SHORT).show();
     }
 
 
