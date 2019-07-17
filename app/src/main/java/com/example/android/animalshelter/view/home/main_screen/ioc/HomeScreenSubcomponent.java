@@ -4,6 +4,7 @@ import com.example.android.animalshelter.view.home.main_screen.ShelterHomeScreen
 
 import dagger.Subcomponent;
 
+@HomeScreenScope
 @Subcomponent(modules = {ShelterHomeScreenModule.class})
 public interface HomeScreenSubcomponent {
 

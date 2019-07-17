@@ -4,15 +4,20 @@ import com.example.android.animalshelter.view.home.main_screen.view.IShelterHome
 
 public class ShelterHomePresenter implements IShelterHomePresenter {
 
-    private final IShelterHomeView view;
+    private IShelterHomeView view;
+    public static int COPIOUI = 0;
 
-    public ShelterHomePresenter(IShelterHomeView view) {
+    public ShelterHomePresenter() {
+        COPIOUI++;
+    }
+
+    @Override
+    public void attachView(IShelterHomeView view) {
         this.view = view;
     }
 
     @Override
-    public void onCreate() {
-
+    public void detachView() {
+        this.view = null;
     }
-
 }

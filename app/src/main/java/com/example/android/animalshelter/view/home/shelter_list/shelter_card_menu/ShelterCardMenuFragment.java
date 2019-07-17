@@ -9,11 +9,13 @@ import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.backbone.ShelterFragment;
 import com.example.android.animalshelter.view.home.create_animal.CreateAnimalCardFragment;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.AnimalMenuFragment;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterMenuViewFactory;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.presenter.IShelterCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.IShelterCardView;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 
 
@@ -24,21 +26,31 @@ public class ShelterCardMenuFragment extends ShelterFragment {
     @Inject
     IShelterCardPresenter presenter;
     @Inject
-    IShelterCardView view;
+    ShelterMenuViewFactory factory;
+    private IShelterCardView view;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            Bundle bundle = this.getArguments();
+            long shelterId = bundle.getLong("shelter_id");
+            getShelterApplication().dependencyInjection().openShelterMenuScope(shelterId);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Bundle bundle = this.getArguments();
         long shelterId = bundle.getLong("shelter_id");
-        getShelterApplication().dependencyInjection().inject(
-                this,
+        getShelterApplication().dependencyInjection().inject(this);
+        this.view = factory.createView(
                 inflater,
                 container,
                 savedInstanceState,
-                animal -> ShelterCardMenuFragment.this.launchToCreateAnimalMenuScreen(animal.getId(), shelterId),
-                shelterId);
-        presenter.onCreate();
+                animal -> ShelterCardMenuFragment.this.launchToCreateAnimalMenuScreen(animal.getId(), shelterId));
+        presenter.attachView(view);
         view.getAndroidView().findViewById(R.id.btn_home_screen_new_animal).setOnClickListener(v -> launchToCreateAnimalScreen(shelterId));
         return view.getAndroidView();
     }
@@ -65,6 +77,20 @@ public class ShelterCardMenuFragment extends ShelterFragment {
         ShelterCardMenuFragment fragment = new ShelterCardMenuFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        this.presenter.detachView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (getActivity().isFinishing()) {
+            getShelterApplication().dependencyInjection().closeShelterMenuScope();
+        }
     }
 
 }

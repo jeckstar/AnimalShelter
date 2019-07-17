@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.android.animalshelter.utils.IOnItemClickListener;
 import com.example.android.animalshelter.view.home.create_animal.CreateAnimalCardFragment;
 import com.example.android.animalshelter.view.home.create_animal.CreateAnimalEventConsumer;
 import com.example.android.animalshelter.view.home.create_animal.ioc.CreateAnimalCardModule;
@@ -16,6 +15,7 @@ import com.example.android.animalshelter.view.home.create_volunteer.CreateVolunt
 import com.example.android.animalshelter.view.home.create_volunteer.CreateVolunteerEventConsumer;
 import com.example.android.animalshelter.view.home.create_volunteer.ioc.CreateVolunteerCardModule;
 import com.example.android.animalshelter.view.home.main_screen.ShelterHomeScreenActivity;
+import com.example.android.animalshelter.view.home.main_screen.ioc.HomeScreenSubcomponent;
 import com.example.android.animalshelter.view.home.main_screen.ioc.ShelterHomeScreenModule;
 import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.MainMenuFragment;
 import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.ioc.MainMenuModule;
@@ -27,13 +27,15 @@ import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.i
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChoosingShelterSubcomponent;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuModule;
-import com.jeka.golub.shelter.domain.animal.Animal;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuSubcomponent;
 
 public class DependencyInjection {
 
     private final ShelterComponent component;
     private ChoosingShelterSubcomponent chooseShelterSubcomponent;
     private AnimalMenuSubcomponent animalMenuSubcomponent;
+    private ShelterCardMenuSubcomponent shelterCardMenuSubcomponent;
+    private HomeScreenSubcomponent homeScreenSubcomponent;
 
     public DependencyInjection(Context context) {
         this.component = DaggerShelterComponent.builder().shelterApplicationModule(new ShelterApplicationModule(context)).build();
@@ -83,31 +85,9 @@ public class DependencyInjection {
                 .inject(fragment);
     }
 
-    public void inject(ShelterHomeScreenActivity activity) {
-        this.component.subcomponent(
-                new ShelterHomeScreenModule(activity))
-                .inject(activity);
-    }
-
     public void inject(MainMenuFragment fragment) {
         this.component.subcomponent(
                 new MainMenuModule(fragment))
-                .inject(fragment);
-    }
-
-    public void inject(ShelterCardMenuFragment fragment,
-                       LayoutInflater inflater,
-                       ViewGroup container,
-                       Bundle savedInstanceState,
-                       IOnItemClickListener<Animal> animalIOnItemClickListener,
-                       long shelterId) {
-        this.component.subcomponent(
-                new ShelterCardMenuModule(
-                        inflater,
-                        container,
-                        savedInstanceState,
-                        animalIOnItemClickListener,
-                        shelterId))
                 .inject(fragment);
     }
 
@@ -134,5 +114,29 @@ public class DependencyInjection {
 
     public void closeChooseShelterScope() {
         this.chooseShelterSubcomponent = null;
+    }
+
+    public void inject(ShelterCardMenuFragment fragment) {
+        this.shelterCardMenuSubcomponent.inject(fragment);
+    }
+
+    public void openShelterMenuScope(long shelterId) {
+        this.shelterCardMenuSubcomponent = this.component.subcomponent(new ShelterCardMenuModule(shelterId));
+    }
+
+    public void closeShelterMenuScope() {
+        this.shelterCardMenuSubcomponent = null;
+    }
+
+    public void inject(ShelterHomeScreenActivity activity) {
+        this.homeScreenSubcomponent.inject(activity);
+    }
+
+    public void openShelterHomeScreenScope() {
+        this.homeScreenSubcomponent = this.component.subcomponent(new ShelterHomeScreenModule());
+    }
+
+    public void closeShelterHomeScreenScope() {
+        this.homeScreenSubcomponent = null;
     }
 }
