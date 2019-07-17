@@ -6,18 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.animalshelter.R;
-import com.example.android.animalshelter.ShelterApplication;
 import com.example.android.animalshelter.backbone.ShelterFragment;
-import com.example.android.animalshelter.utils.IOnItemClickListener;
 import com.example.android.animalshelter.view.home.create_animal.CreateAnimalCardFragment;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.AnimalMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.presenter.IShelterCardPresenter;
-import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.presenter.ShelterCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.IShelterCardView;
-import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.view.ShelterCardView;
-import com.jeka.golub.shelter.domain.animal.Animal;
-
-import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 

@@ -12,19 +12,13 @@ import java.util.concurrent.Executor;
 
 public class ChoosingShelterPresenter implements IChoosingShelterPresenter {
 
-    private final IChoosingShelterView view;
     private final ShelterRepository shelterRepositories;
     private final Executor executor;
+    private IChoosingShelterView view;
 
-    public ChoosingShelterPresenter(IChoosingShelterView view, ShelterRepository shelterRepositories, Executor executor) {
-        this.view = view;
+    public ChoosingShelterPresenter(ShelterRepository shelterRepositories, Executor executor) {
         this.shelterRepositories = shelterRepositories;
         this.executor = executor;
-    }
-
-    @Override
-    public void onCreate() {
-        onShowAllShelters();
     }
 
     @Override
@@ -33,5 +27,16 @@ public class ChoosingShelterPresenter implements IChoosingShelterPresenter {
             final List<Shelter> shelters = shelterRepositories.getAll();
             new Handler(Looper.getMainLooper()).post(() -> view.updateShelterList(shelters));
         });
+    }
+
+    @Override
+    public void attachView(IChoosingShelterView view) {
+        this.view = view;
+        onShowAllShelters();
+    }
+
+    @Override
+    public void detachView() {
+        this.view = null;
     }
 }

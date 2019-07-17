@@ -21,17 +21,19 @@ import com.example.android.animalshelter.view.home.main_screen.main_menu_fragmen
 import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.ioc.MainMenuModule;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.AnimalMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.ioc.AnimalMenuModule;
+import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.ioc.AnimalMenuSubcomponent;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ChoosingShelterFragment;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChoosingShelterModule;
+import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChoosingShelterSubcomponent;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuModule;
 import com.jeka.golub.shelter.domain.animal.Animal;
-import com.jeka.golub.shelter.domain.shelter.Shelter;
-import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 
 public class DependencyInjection {
 
     private final ShelterComponent component;
+    private ChoosingShelterSubcomponent chooseShelterSubcomponent;
+    private AnimalMenuSubcomponent animalMenuSubcomponent;
 
     public DependencyInjection(Context context) {
         this.component = DaggerShelterComponent.builder().shelterApplicationModule(new ShelterApplicationModule(context)).build();
@@ -93,36 +95,6 @@ public class DependencyInjection {
                 .inject(fragment);
     }
 
-    public void inject(AnimalMenuFragment fragment,
-                       LayoutInflater inflater,
-                       ViewGroup container,
-                       Bundle savedInstanceState,
-                       IOnItemClickListener<Volunteer> volunteerIOnItemClickListener, long animalId, long shelterId) {
-        this.component.subcomponent(
-                new AnimalMenuModule(
-                        inflater,
-                        container,
-                        savedInstanceState,
-                        volunteerIOnItemClickListener,
-                        animalId,
-                        shelterId))
-                .inject(fragment);
-    }
-
-    public void inject(ChoosingShelterFragment fragment,
-                       LayoutInflater inflater,
-                       ViewGroup container,
-                       Bundle savedInstanceState,
-                       IOnItemClickListener<Shelter> shelterIOnItemClickListener) {
-        this.component.subcomponent(
-                new ChoosingShelterModule(
-                        inflater,
-                        container,
-                        savedInstanceState,
-                        shelterIOnItemClickListener))
-                .inject(fragment);
-    }
-
     public void inject(ShelterCardMenuFragment fragment,
                        LayoutInflater inflater,
                        ViewGroup container,
@@ -139,4 +111,28 @@ public class DependencyInjection {
                 .inject(fragment);
     }
 
+    public void inject(AnimalMenuFragment fragment) {
+        this.animalMenuSubcomponent.inject(fragment);
+    }
+
+    public void openAnimalMenuScope(long animalId, long shelterId) {
+        this.animalMenuSubcomponent = this.component.subcomponent(new AnimalMenuModule(animalId,
+                shelterId));
+    }
+
+    public void closeAnimalMenuScope() {
+        this.animalMenuSubcomponent = null;
+    }
+
+    public void inject(ChoosingShelterFragment fragment) {
+        this.chooseShelterSubcomponent.inject(fragment);
+    }
+
+    public void openChooseShelterScope() {
+        this.chooseShelterSubcomponent = this.component.subcomponent(new ChoosingShelterModule());
+    }
+
+    public void closeChooseShelterScope() {
+        this.chooseShelterSubcomponent = null;
+    }
 }
