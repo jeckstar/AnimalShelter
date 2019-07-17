@@ -4,6 +4,7 @@ import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu
 
 import dagger.Subcomponent;
 
+@AnimalMenuScope
 @Subcomponent(modules = {AnimalMenuModule.class})
 public interface AnimalMenuSubcomponent {
 
