@@ -9,6 +9,8 @@ import com.example.android.animalshelter.backbone.ShelterFragment;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.ioc.ChooseAnimalMenuViewFactory;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.presenter.IAnimalCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.view.IAnimalCardView;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.RouteMapActivity;
+import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 
 import javax.inject.Inject;
 
@@ -45,9 +47,22 @@ public class AnimalMenuFragment extends ShelterFragment {
                 inflater,
                 container,
                 savedInstanceState,
-                volunteer -> presenter.onTakeAnimalForAWalk(volunteer));
+                volunteer -> presenter.onTakeAnimalForAWalk(volunteer),
+                this::launchToChooseRouteScreen);
         presenter.attachView(view);
         return view.getAndroidView();
+    }
+
+    public void launchToChooseRouteScreen(Volunteer volunteer) {
+        Bundle bundle = this.getArguments();
+        final long animalId = bundle.getLong(KEY_ANIMAL_ID);
+        final long shelterId = bundle.getLong(KEY_SHELTER_ID);
+        RouteMapActivity.push(
+                getShelterApplication().getApplicationContext(),
+                animalId,
+                shelterId,
+                volunteer.getId()
+        );
     }
 
     public static AnimalMenuFragment newInstance(long animalId, long shelterId) {

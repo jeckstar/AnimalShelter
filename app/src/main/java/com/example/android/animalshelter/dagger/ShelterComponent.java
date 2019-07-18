@@ -15,6 +15,8 @@ import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.ioc.AnimalMenuSubcomponent;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChoosingShelterModule;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChoosingShelterSubcomponent;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.ioc.RouteModule;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.ioc.RouteSubcomponent;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuModule;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuSubcomponent;
 
@@ -41,6 +43,8 @@ public interface ShelterComponent {
     ChoosingShelterSubcomponent subcomponent(ChoosingShelterModule module);
 
     ShelterCardMenuSubcomponent subcomponent(ShelterCardMenuModule module);
+
+    RouteSubcomponent subcomponent(RouteModule routeModule);
 }
 
 

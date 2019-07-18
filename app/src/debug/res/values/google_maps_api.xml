@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=98:6B:94:0A:F6:8B:B1:67:31:31:5A:39:FF:15:FA:03:B9:B8:5C:C1%3Bcom.example.android.animalshelter.view.home.shelter_list.route_choosing
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    98:6B:94:0A:F6:8B:B1:67:31:31:5A:39:FF:15:FA:03:B9:B8:5C:C1
+
+    SHA-1 certificate fingerprint:
+    98:6B:94:0A:F6:8B:B1:67:31:31:5A:39:FF:15:FA:03:B9:B8:5C:C1
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB9jqdSPZ3l2_tUbV7E4evii5rod_i1z-4</string>
+</resources>

@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+
 public class AnimalCardPresenter implements IAnimalCardPresenter {
     private final VolunteerRepository volunteerRepository;
     private final AnimalRepository animalRepository;

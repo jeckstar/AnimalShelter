@@ -23,6 +23,7 @@ public class ShelterCardMenuFragment extends ShelterFragment {
 
     public static final String KEY_SHELTER_ID = "shelter_id";
     public static final String KEY_ANIMAL_ID = "animal_id";
+    public static final String KEY_VOLUNTEER_ID = "animal_id";
     @Inject
     IShelterCardPresenter presenter;
     @Inject

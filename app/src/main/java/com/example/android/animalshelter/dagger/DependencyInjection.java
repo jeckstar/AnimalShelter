@@ -25,6 +25,9 @@ import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ChoosingShelterFragment;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChoosingShelterModule;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChoosingShelterSubcomponent;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.RouteMapActivity;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.ioc.RouteModule;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.ioc.RouteSubcomponent;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuModule;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuSubcomponent;
@@ -36,6 +39,7 @@ public class DependencyInjection {
     private AnimalMenuSubcomponent animalMenuSubcomponent;
     private ShelterCardMenuSubcomponent shelterCardMenuSubcomponent;
     private HomeScreenSubcomponent homeScreenSubcomponent;
+    private RouteSubcomponent routeSubcomponent;
 
     public DependencyInjection(Context context) {
         this.component = DaggerShelterComponent.builder().shelterApplicationModule(new ShelterApplicationModule(context)).build();
@@ -104,39 +108,52 @@ public class DependencyInjection {
         this.animalMenuSubcomponent = null;
     }
 
-    public void inject(ChoosingShelterFragment fragment) {
-        this.chooseShelterSubcomponent.inject(fragment);
-    }
-
     public void openChooseShelterScope() {
         this.chooseShelterSubcomponent = this.component.subcomponent(new ChoosingShelterModule());
+    }
+
+    public void inject(ChoosingShelterFragment fragment) {
+        this.chooseShelterSubcomponent.inject(fragment);
     }
 
     public void closeChooseShelterScope() {
         this.chooseShelterSubcomponent = null;
     }
 
-    public void inject(ShelterCardMenuFragment fragment) {
-        this.shelterCardMenuSubcomponent.inject(fragment);
-    }
-
     public void openShelterMenuScope(long shelterId) {
         this.shelterCardMenuSubcomponent = this.component.subcomponent(new ShelterCardMenuModule(shelterId));
+    }
+
+    public void inject(ShelterCardMenuFragment fragment) {
+        this.shelterCardMenuSubcomponent.inject(fragment);
     }
 
     public void closeShelterMenuScope() {
         this.shelterCardMenuSubcomponent = null;
     }
 
-    public void inject(ShelterHomeScreenActivity activity) {
-        this.homeScreenSubcomponent.inject(activity);
-    }
-
     public void openShelterHomeScreenScope() {
         this.homeScreenSubcomponent = this.component.subcomponent(new ShelterHomeScreenModule());
     }
 
+    public void inject(ShelterHomeScreenActivity activity) {
+        this.homeScreenSubcomponent.inject(activity);
+    }
+
     public void closeShelterHomeScreenScope() {
         this.homeScreenSubcomponent = null;
+    }
+
+    public void openRouteScope(long animalId, long shelterId, long volunteerId) {
+        this.routeSubcomponent = this.component.subcomponent(
+                new RouteModule(animalId, shelterId, volunteerId));
+    }
+
+    public void inject(RouteMapActivity fragment) {
+        this.routeSubcomponent.inject(fragment);
+    }
+
+    public void closeRouteScope() {
+        this.routeSubcomponent = null;
     }
 }

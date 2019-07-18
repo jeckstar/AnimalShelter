@@ -22,12 +22,14 @@ public class ChooseAnimalMenuViewFactory {
     public AnimalCardView createView(@NonNull LayoutInflater inflater,
                                      ViewGroup container,
                                      Bundle savedInstanceState,
-                                     IOnItemClickListener<Volunteer> chooseVolunteerListener) {
+                                     IOnItemClickListener<Volunteer> chooseVolunteerListener,
+                                     IOnItemClickListener<Volunteer> onChooseRouteListener) {
         return new AnimalCardView(
                 inflater,
                 container,
                 savedInstanceState,
-                chooseVolunteerListener);
+                chooseVolunteerListener,
+                onChooseRouteListener);
     }
 
 }
