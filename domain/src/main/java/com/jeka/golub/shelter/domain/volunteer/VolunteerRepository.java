@@ -1,5 +1,7 @@
 package com.jeka.golub.shelter.domain.volunteer;
 
+import com.jeka.golub.shelter.domain.animal.Animal;
+
 import java.util.List;
 
 public interface VolunteerRepository {
@@ -8,4 +10,6 @@ public interface VolunteerRepository {
     List<Volunteer> getAll();
 
     List<Volunteer> getAvailableVolunteers();
+
+    Volunteer getById(long currentVolunteerId);
 }

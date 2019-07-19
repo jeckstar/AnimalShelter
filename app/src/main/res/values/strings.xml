@@ -28,4 +28,6 @@
     <string name="last_walk_time">Last walk time:</string>
     <string name="period_of_walk">Period of walk:</string>
     <string name="title_activity_route_map">Map</string>
+    <string name="first_name">first_name</string>
+    <string name="last_name">last_name</string>
 </resources>

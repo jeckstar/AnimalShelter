@@ -5,5 +5,7 @@ import com.example.android.animalshelter.view.presenter.Presenter;
 
 public interface IRoutePresenter extends Presenter<IRouteView> {
 
+    void onShowSelectedItem();
+
     void onTakeAnimalForAWalk();
 }

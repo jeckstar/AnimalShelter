@@ -1,8 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.home.shelter_list.route_choosing.RouteMapActivity" />
+    android:layout_height="match_parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.home.shelter_list.route_choosing.RouteMapActivity" />
+
+    <ImageView
+        android:id="@+id/iv_map_card_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/map_card_info" />
+
+
+    <ImageView
+        android:id="@+id/iv_map_card_line"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_map_card_info"
+        app:layout_constraintEnd_toEndOf="@+id/iv_map_card_info"
+        app:layout_constraintStart_toStartOf="@+id/iv_map_card_info"
+        app:layout_constraintTop_toTopOf="@+id/iv_map_card_info"
+        app:srcCompat="@drawable/map_card_line" />
+
+
+    <TextView
+        android:id="@+id/tv_map_animal_kind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="@string/kind"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_map_card_info"
+        app:layout_constraintStart_toStartOf="@+id/iv_map_card_info"
+        app:layout_constraintTop_toTopOf="@+id/iv_map_card_info" />
+
+    <TextView
+        android:id="@+id/tv_map_animal_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_map_animal_kind"
+        app:layout_constraintStart_toEndOf="@+id/tv_map_animal_kind"
+        app:layout_constraintTop_toTopOf="@+id/tv_map_animal_kind"
+        tools:text="@string/name" />
+
+    <TextView
+        android:id="@+id/tv_map_volunteer_first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_map_animal_name"
+        app:layout_constraintStart_toEndOf="@+id/iv_map_card_line"
+        app:layout_constraintTop_toTopOf="@+id/tv_map_animal_name"
+        tools:text="@string/first_name" />
+
+    <TextView
+        android:id="@+id/tv_map_volunteer_last_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_map_volunteer_first_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_map_volunteer_first_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_map_volunteer_first_name"
+        tools:text="@string/last_name" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

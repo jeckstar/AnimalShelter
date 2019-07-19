@@ -43,4 +43,10 @@ public class SQLiteVolunteerRepository implements VolunteerRepository {
         }
         return volunteers;
     }
+
+    @Override
+    public Volunteer getById(long currentVolunteerId) {
+        VolunteerEntity volunteerEntity = dao.getById(currentVolunteerId);
+        return volunteerEntityConverter.convertReverse(volunteerEntity);
+    }
 }

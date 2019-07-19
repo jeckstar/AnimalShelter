@@ -40,7 +40,11 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
         if (savedInstanceState == null) {
             Bundle bundle = this.getIntent().getExtras();
             final RouteMapActivityParameters parameters = bundle.getParcelable(KEY_PARAMETERS);
-            getShelterApplication().dependencyInjection().openRouteScope(parameters.animalId, parameters.shelterId, parameters.volunteerId);
+            getShelterApplication().dependencyInjection().openRouteScope(
+                    parameters.animalId,
+                    parameters.shelterId,
+                    parameters.volunteerId
+            );
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

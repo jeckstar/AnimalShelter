@@ -4,4 +4,6 @@ public interface IRouteView {
     void showThatVolunteerTakeAnimalForAWalkSuccessfully();
 
     void showWarningMassage();
+
+    void showSelectedItem(String animalKind, String animalName, String volunteerFirstName, String volunteerLastName);
 }
