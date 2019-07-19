@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.android.animalshelter.backbone.ShelterFragment;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.ioc.ChooseAnimalMenuViewFactory;
-import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.presenter.IAnimalCardPresenter;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.presenter.IAnimalCardPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.view.IAnimalCardView;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.RouteMapActivity;
 import com.jeka.golub.shelter.domain.volunteer.Volunteer;

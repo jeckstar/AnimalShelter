@@ -11,16 +11,11 @@ import com.example.android.animalshelter.backbone.ShelterActivity;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.ioc.RouteViewFactory;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.presenter.IRoutePresenter;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.RouteView;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import javax.inject.Inject;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallback {
 
@@ -32,6 +27,8 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
     RouteViewFactory factory;
     private RouteView view;
     private GoogleMap mMap;
+
+    private IUserLocation userLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,32 +43,26 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
                     parameters.volunteerId
             );
         }
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        userLocation = new UserLocation(this);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         getShelterApplication().dependencyInjection().inject(this);
         this.view = factory.createView(this);
         presenter.attachView(view);
+        userLocation.findLocation();
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+         userLocation.findLocation();
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng kharkov = new LatLng( 49.9902794,  36.2303893);
-        mMap.addMarker(new MarkerOptions().position(kharkov).title("Marker in Kharkov"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(kharkov));
+        userLocation.attachMap(mMap);
     }
 
     public static void push(Context context, long animalId, long shelterId, long volunteerId) {

@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.presenter;
+package com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
