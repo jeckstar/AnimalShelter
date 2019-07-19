@@ -30,4 +30,6 @@
     <string name="title_activity_route_map">Map</string>
     <string name="first_name">first_name</string>
     <string name="last_name">last_name</string>
+    <string name="remove_last_nadded_marker">Remove last\nadded marker</string>
+    <string name="remove_all_n_markers">Remove all\nmarkers</string>
 </resources>

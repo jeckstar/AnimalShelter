@@ -1,5 +1,6 @@
 package com.example.android.animalshelter.view.home.shelter_list.route_choosing.view;
 
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +16,14 @@ public class RouteView implements IRouteView {
     private final TextView tvVolunteerFirstName;
     private final TextView tvVolunteerLastName;
 
-    public RouteView(FragmentActivity fragmentActivity) {
+    public RouteView(FragmentActivity fragmentActivity, View.OnClickListener onRemoveLastAddedMarker, View.OnClickListener onRemoveAllMarkers) {
         rootView = fragmentActivity;
         tvKind = rootView.findViewById(R.id.tv_map_animal_kind);
         tvAnimalName = rootView.findViewById(R.id.tv_map_animal_name);
         tvVolunteerFirstName = rootView.findViewById(R.id.tv_map_volunteer_first_name);
         tvVolunteerLastName = rootView.findViewById(R.id.tv_map_volunteer_last_name);
+        rootView.findViewById(R.id.iv_map_remove_marker).setOnClickListener(onRemoveLastAddedMarker);
+        rootView.findViewById(R.id.iv_map_remove_all_markers).setOnClickListener(onRemoveAllMarkers);
     }
 
 

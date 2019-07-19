@@ -7,6 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -64,9 +65,6 @@ public class UserLocation implements IUserLocation {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-//            if (provider.equals(LocationManager.GPS_PROVIDER)) {
-//            } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-//            }
         }
     };
 
@@ -77,18 +75,13 @@ public class UserLocation implements IUserLocation {
             location.getLatitude();
             location.getLongitude();
             LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(userLocation).title("You are here now"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
         } else if (location.getProvider().equals(
                 LocationManager.NETWORK_PROVIDER)) {
             location.getLatitude();
             location.getLongitude();
             LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(userLocation).title("You are here now"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
-
         }
     }
 

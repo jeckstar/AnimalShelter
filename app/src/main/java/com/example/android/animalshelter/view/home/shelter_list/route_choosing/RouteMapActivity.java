@@ -1,10 +1,14 @@
 package com.example.android.animalshelter.view.home.shelter_list.route_choosing;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.backbone.ShelterActivity;
@@ -14,12 +18,20 @@ import com.example.android.animalshelter.view.home.shelter_list.route_choosing.v
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallback {
 
     private static final String KEY_PARAMETERS = "PARAMETERS";
+    private static final String TAG = "click";
+    private final List<Marker> markers = new ArrayList<>();
 
     @Inject
     IRoutePresenter presenter;
@@ -48,7 +60,12 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         getShelterApplication().dependencyInjection().inject(this);
-        this.view = factory.createView(this);
+        this.view = factory.createView(
+                this,
+                v -> removeLastAddedMarker(),
+                v -> removeAllMarkers());
+
+
         presenter.attachView(view);
         userLocation.findLocation();
     }
@@ -56,14 +73,67 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
     @Override
     protected void onResume() {
         super.onResume();
-         userLocation.findLocation();
+        userLocation.findLocation();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         userLocation.attachMap(mMap);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.setMyLocationEnabled(true);
+        if (mMap != null) {
+            init();
+        }
     }
+
+    private void init() {
+        mMap.setOnMapClickListener(latLng -> {
+            Log.d(TAG, "onMapClick: " + latLng.latitude + "," + latLng.longitude);
+            addMarker(latLng);
+        });
+        mMap.setOnMarkerClickListener(marker -> {
+            marker.showInfoWindow();
+            return false;
+        });
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                Log.d(TAG, "onMapLongClick: " + latLng.latitude + "," + latLng.longitude);
+            }
+        });
+    }
+
+    public void addMarker(LatLng latLng) {
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .anchor((float) 0.5, 0)
+                .title("Marker"))
+        );
+    }
+
+    public void removeLastAddedMarker() {
+        if(markers.isEmpty()){
+            return;
+        }
+        markers.remove(markers.size() - 1).remove();
+    }
+
+    public void removeAllMarkers() {
+        if(markers.isEmpty()){
+            return;
+        }
+        for (int i = 0; i < markers.size(); i++) {
+            markers.get(i).remove();
+        }
+        markers.clear();
+    }
+
 
     public static void push(Context context, long animalId, long shelterId, long volunteerId) {
         Intent intent = new Intent(context, RouteMapActivity.class);
