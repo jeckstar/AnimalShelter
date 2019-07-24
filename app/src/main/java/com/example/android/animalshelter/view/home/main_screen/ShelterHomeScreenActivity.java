@@ -4,11 +4,10 @@ import android.os.Bundle;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.backbone.ShelterActivity;
+import com.example.android.animalshelter.view.home.main_screen.ioc.HomeScreenViewFactory;
 import com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.MainMenuFragment;
 import com.example.android.animalshelter.view.home.main_screen.presenter.IShelterHomePresenter;
-import com.example.android.animalshelter.view.home.main_screen.presenter.ShelterHomePresenter;
 import com.example.android.animalshelter.view.home.main_screen.view.IShelterHomeView;
-import com.example.android.animalshelter.view.home.main_screen.view.ShelterHomeView;
 
 import javax.inject.Inject;
 
@@ -20,7 +19,8 @@ public class ShelterHomeScreenActivity extends ShelterActivity {
     @Inject
     IShelterHomePresenter presenter;
     @Inject
-    IShelterHomeView view;
+    HomeScreenViewFactory factory;
+    private IShelterHomeView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +30,20 @@ public class ShelterHomeScreenActivity extends ShelterActivity {
             final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fl_home_screen_fragment_layout, new MainMenuFragment());
             fragmentTransaction.commit();
+            getShelterApplication().dependencyInjection().openShelterHomeScreenScope();
         }
         getShelterApplication().dependencyInjection().inject(this);
-        presenter.onCreate();
+        this.view = factory.createView(this);
+        presenter.attachView(view);
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.presenter.detachView();
+        if (isFinishing()) {
+            getShelterApplication().dependencyInjection().closeShelterHomeScreenScope();
+        }
+    }
 }

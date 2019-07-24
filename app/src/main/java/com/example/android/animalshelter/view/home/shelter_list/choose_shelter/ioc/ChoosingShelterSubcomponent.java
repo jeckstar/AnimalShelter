@@ -4,6 +4,7 @@ import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.C
 
 import dagger.Subcomponent;
 
+@ChooseShelterScope
 @Subcomponent(modules = ChoosingShelterModule.class)
 public interface ChoosingShelterSubcomponent {
 

@@ -1,7 +1,7 @@
 package com.example.android.animalshelter.view.home.main_screen.presenter;
 
-public interface IShelterHomePresenter {
+import com.example.android.animalshelter.view.home.main_screen.view.IShelterHomeView;
+import com.example.android.animalshelter.view.presenter.Presenter;
 
-    void onCreate();
-
+public interface IShelterHomePresenter extends Presenter<IShelterHomeView> {
 }

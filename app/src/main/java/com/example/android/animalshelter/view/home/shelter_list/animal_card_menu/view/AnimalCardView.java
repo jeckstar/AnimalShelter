@@ -39,16 +39,17 @@ public class AnimalCardView implements IAnimalCardView {
     public AnimalCardView(@NonNull final LayoutInflater inflater,
                           final ViewGroup container,
                           final Bundle savedInstanceState,
-                          IOnItemClickListener<Volunteer> chooseVolunteerListener) {
+                          IOnItemClickListener<Volunteer> chooseVolunteerListener,
+                          IOnItemClickListener<Volunteer> onChooseRouteListener) {
         rootView = inflater.inflate(R.layout.fragment_animal_card_menu, container, false);
 
         allVolunteers = new ArrayList<>();
         allVolunteersAdapter = new AllVolunteerRecyclerViewAdapter(
                 allVolunteers,
-                chooseVolunteerListener);
+                chooseVolunteerListener,
+                onChooseRouteListener);
         rvAllAnimals = rootView.findViewById(R.id.rv_animal_card_screen_volunteers);
         rvAllAnimals.setAdapter(allVolunteersAdapter);
-        ;
         rvAllAnimals.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
         tvKind = rootView.findViewById(R.id.tv_animal_menu_animal_kind);
         tvName = rootView.findViewById(R.id.tv_animal_menu_animal_name);
