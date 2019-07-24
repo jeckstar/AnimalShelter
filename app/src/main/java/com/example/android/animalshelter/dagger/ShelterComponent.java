@@ -25,7 +25,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {ShelterApplicationModule.class, InfrastructureModule.class})
+@Component(modules = {ShelterApplicationModule.class, InfrastructureModule.class, HttpClientModule.class})
 public interface ShelterComponent {
 
     CreateAnimalCardSubcomponent subcomponent(CreateAnimalCardModule module);

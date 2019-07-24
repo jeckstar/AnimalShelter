@@ -1,5 +1,5 @@
 
-package com.example.android.network.route.dto;
+package com.example.android.network.route.dto.response;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -13,6 +13,9 @@ public class RouteDto {
     @SerializedName("distance")
     @Expose
     private double distance;
+    @SerializedName("shape")
+    @Expose
+    private ShapeDto shape;
     @SerializedName("legs")
     @Expose
     private List<LegDto> legs = null;
@@ -51,5 +54,13 @@ public class RouteDto {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public ShapeDto getShape() {
+        return shape;
+    }
+
+    public void setShape(ShapeDto shape) {
+        this.shape = shape;
     }
 }

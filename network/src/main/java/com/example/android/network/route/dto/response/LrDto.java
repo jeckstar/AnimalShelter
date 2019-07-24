@@ -1,10 +1,10 @@
 
-package com.example.android.network.route.dto;
+package com.example.android.network.route.dto.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UlDto {
+public class LrDto {
 
     @SerializedName("lng")
     @Expose

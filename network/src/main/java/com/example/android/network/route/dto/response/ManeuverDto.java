@@ -1,5 +1,5 @@
 
-package com.example.android.network.route.dto;
+package com.example.android.network.route.dto.response;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
