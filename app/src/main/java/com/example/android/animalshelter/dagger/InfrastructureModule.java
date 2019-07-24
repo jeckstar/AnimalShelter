@@ -18,8 +18,6 @@ import com.jeka.golub.shelter.persistence.volunteer.VolunteerEntityConverter;
 import com.jeka.golub.shelter.persistence.walk.SQLiteWalkRepository;
 import com.jeka.golub.shelter.persistence.walk.WalkEntityConverter;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Singleton;
 
 import androidx.room.Room;
@@ -71,15 +69,7 @@ public class InfrastructureModule {
 
     @Singleton
     @Provides
-    public OkHttpClient buildOkHttpClient(){
-        return new OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .build();
-    }
-
-    @Singleton
-    @Provides
-    public Retrofit buildRetrofit(OkHttpClient client){
+    public Retrofit buildRetrofit(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(MAPQUEST_DOMAIN)
                 .addConverterFactory(GsonConverterFactory.create())
