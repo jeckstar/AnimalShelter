@@ -10,7 +10,7 @@ import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 import com.jeka.golub.shelter.domain.walk.Walk;
 import com.jeka.golub.shelter.domain.walk.WalkRepository;
-import com.jeka.golub.shelter.exeptions.WalkException;
+import com.jeka.golub.shelter.domain.walk.WalkException;
 
 import java.util.Date;
 import java.util.List;

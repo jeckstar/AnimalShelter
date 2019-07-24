@@ -2,6 +2,7 @@ package com.example.android.animalshelter.dagger;
 
 import android.content.Context;
 
+import com.example.android.network.route.RetrofitRouteController;
 import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 import com.jeka.golub.shelter.domain.shelter.ShelterRepository;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
@@ -17,16 +18,22 @@ import com.jeka.golub.shelter.persistence.volunteer.VolunteerEntityConverter;
 import com.jeka.golub.shelter.persistence.walk.SQLiteWalkRepository;
 import com.jeka.golub.shelter.persistence.walk.WalkEntityConverter;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import androidx.room.Room;
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class InfrastructureModule {
 
     private static final String FILE_NAME = "shelter.db";
+    public static final String MAPQUEST_DOMAIN = "http://open.mapquestapi.com/";
 
     @Singleton
     @Provides
@@ -60,6 +67,30 @@ public class InfrastructureModule {
     @Provides
     public WalkRepository walkRepository(ShelterDatabase database) {
         return new SQLiteWalkRepository(database.getWalkDao(), new WalkEntityConverter());
+    }
+
+    @Singleton
+    @Provides
+    public OkHttpClient buildOkHttpClient(){
+        return new OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .build();
+    }
+
+    @Singleton
+    @Provides
+    public Retrofit buildRetrofit(OkHttpClient client){
+        return new Retrofit.Builder()
+                .baseUrl(MAPQUEST_DOMAIN)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+    }
+
+    @Singleton
+    @Provides
+    public RetrofitRouteController buildRetrofitRouteController(Retrofit retrofit) {
+        return retrofit.create(RetrofitRouteController.class);
     }
 
 }

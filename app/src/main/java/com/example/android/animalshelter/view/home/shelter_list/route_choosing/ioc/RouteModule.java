@@ -2,6 +2,10 @@ package com.example.android.animalshelter.view.home.shelter_list.route_choosing.
 
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.presenter.IRoutePresenter;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.presenter.RoutePresenter;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.presenter.RoutesFacade;
+import com.example.android.network.route.MapQuestRetrofitRouteService;
+import com.example.android.network.route.RetrofitRouteController;
+import com.example.android.network.route.RouteFactory;
 import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 import com.jeka.golub.shelter.domain.walk.WalkRepository;
@@ -32,12 +36,18 @@ public class RouteModule {
     @RouteScope
     public IRoutePresenter getAnimalCardPresenter(VolunteerRepository volunteerRepository,
                                                   AnimalRepository animalRepository,
-                                                  WalkRepository walkRepository
+                                                  WalkRepository walkRepository,
+                                                  RetrofitRouteController controller
     ) {
         return new RoutePresenter(
-                volunteerRepository,
-                animalRepository,
-                walkRepository,
+                new RoutesFacade(
+                        volunteerRepository,
+                        animalRepository,
+                        walkRepository,
+                        new MapQuestRetrofitRouteService(
+                                controller,
+                                new RouteFactory())
+                ),
                 Executors.newCachedThreadPool(),
                 this.animalId,
                 this.shelterId,

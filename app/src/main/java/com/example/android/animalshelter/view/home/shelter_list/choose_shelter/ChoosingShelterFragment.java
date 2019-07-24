@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.backbone.ShelterFragment;
+import com.example.android.animalshelter.utils.IOnItemClickListener;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ioc.ChooseShelterViewFactory;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.presenter.IChoosingShelterPresenter;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.view.ChoosingShelterView;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment;
+import com.jeka.golub.shelter.domain.shelter.Shelter;
 
 import javax.inject.Inject;
 

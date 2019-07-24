@@ -13,10 +13,11 @@ public class RouteFactory {
 
     public Route createRoute(RouteDto routeDto) {
         List<Location> locations = new ArrayList<>();
-        LegDto leg = routeDto.getLegs().get(0);
+        final LegDto leg = routeDto.getLegs().get(0);
+        final String sessionId = routeDto.getSessionId();
         for (ManeuverDto maneuverDto : leg.getManeuvers()) {
             locations.add(
-                    new Location(
+                    Location.createLocation(
                             maneuverDto.getStartPoint().getLat(),
                             maneuverDto.getStartPoint().getLng()
                     )
@@ -24,7 +25,8 @@ public class RouteFactory {
         }
         return new Route(
                 routeDto.getDistance(),
-                locations
+                locations,
+                sessionId
         );
     }
 }

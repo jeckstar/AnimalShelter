@@ -10,9 +10,9 @@ public interface RetrofitRouteController {
 
     String KEY_ROUTE = "vjcfcYUfvnhWpoVkPE3cGEabBSp1Er7R";
 
-    @GET("directions/v2/route?key=" + KEY_ROUTE + "&from={fromPoint}&to={toPoint}")
+    @GET("directions/v2/route?key=" + KEY_ROUTE)
     Call<RootRoutesDTO> getRoute(
-            @Query(value = "fromPoint", encoded = true) String fromPoint,
-            @Query(value = "toPoint", encoded = true) String toPoint
+            @Query(value = "from", encoded = true) String fromPoint,
+            @Query(value = "to", encoded = true) String toPoint
     );
 }

@@ -7,7 +7,7 @@ public class Location {
     private final double latitude;
     private final double longitude;
 
-    public Location(double latitude, double longitude) {
+    private Location(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -37,5 +37,9 @@ public class Location {
     @Override
     public String toString() {
         return latitude + "," + longitude;
+    }
+
+    public static Location createLocation(double latitude, double longitude) {
+        return new Location(latitude, longitude);
     }
 }

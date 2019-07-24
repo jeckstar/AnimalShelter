@@ -1,14 +1,11 @@
 package com.example.android.network.route;
 
-import com.example.android.network.exception.RequestFailedException;
-import com.example.android.network.route.dto.RootRoutesDTO;
 import com.jeka.golub.shelter.domain.route.Location;
 import com.jeka.golub.shelter.domain.route.Route;
+import com.jeka.golub.shelter.domain.route.RouteResolvationException;
 import com.jeka.golub.shelter.domain.route.RouteService;
 
 import java.io.IOException;
-
-import retrofit2.Response;
 
 public class MapQuestRetrofitRouteService implements RouteService {
     private final RetrofitRouteController controller;
@@ -22,14 +19,9 @@ public class MapQuestRetrofitRouteService implements RouteService {
     @Override
     public Route getRoute(Location from, Location to) {
         try {
-            Response<RootRoutesDTO> response = controller.getRoute(from.toString(), to.toString()).execute();
-            if (response.isSuccessful()) {
-                return factory.createRoute(response.body().getRoute());
-            } else {
-                throw new RequestFailedException(response);
-            }
+            return factory.createRoute(controller.getRoute(from.toString(), to.toString()).execute().body().getRoute());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RouteResolvationException("Could not resolve route between " + from + " and " + to, e);
         }
     }
 }

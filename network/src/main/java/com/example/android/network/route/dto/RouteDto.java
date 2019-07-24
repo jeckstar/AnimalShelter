@@ -16,6 +16,10 @@ public class RouteDto {
     @SerializedName("legs")
     @Expose
     private List<LegDto> legs = null;
+    @SerializedName("sessionId")
+    @Expose
+    private String sessionId;
+
 
     public BoundingBoxDto getBoundingBox() {
         return boundingBox;
@@ -41,4 +45,11 @@ public class RouteDto {
         this.legs = legs;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 }

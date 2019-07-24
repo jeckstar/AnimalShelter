@@ -15,7 +15,9 @@ public class RouteViewFactory {
 
     }
 
-    public RouteView createView(FragmentActivity activity, View.OnClickListener onRemoveLastAddedMarker, View.OnClickListener onRemoveAllMarkers) {
+    public RouteView createView(FragmentActivity activity,
+                                View.OnClickListener onRemoveLastAddedMarker,
+                                View.OnClickListener onRemoveAllMarkers) {
         return new RouteView(activity,
                 onRemoveLastAddedMarker,
                 onRemoveAllMarkers);

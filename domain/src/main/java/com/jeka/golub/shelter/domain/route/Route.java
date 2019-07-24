@@ -7,10 +7,13 @@ public class Route {
 
     private final double distance;
     private final List<Location> locations;
+    private final String sessionId;
 
-    public Route(double distance, List<Location> locations) {
+
+    public Route(double distance, List<Location> locations, String sessionId) {
         this.distance = distance;
         this.locations = locations;
+        this.sessionId = sessionId;
     }
 
     public double getDistance() {
@@ -41,5 +44,9 @@ public class Route {
                 "distance=" + distance +
                 ", locations=" + locations +
                 '}';
+    }
+
+    public String getSessionId() {
+        return sessionId;
     }
 }
