@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.android.animalshelter.R;
 import com.example.android.animalshelter.backbone.ShelterActivity;
-import com.example.android.animalshelter.utils.IOnItemClickListener;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.ioc.RouteViewFactory;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.presenter.IRoutePresenter;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.RouteView;
@@ -42,10 +42,7 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
     RouteViewFactory factory;
     private RouteView view;
     private GoogleMap mMap;
-
-    private IUserLocation userLocation;
-    private boolean isNetConected = false;
-    private List<Location> stackOfPoint = new ArrayList<>();
+    private boolean isNetConnected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,6 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
                     parameters.volunteerId
             );
         }
-        userLocation = new UserLocation(this);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -70,19 +66,14 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
                 v -> removeLastAddedMarker(),
                 v -> removeAllMarkers());
 
-
-        presenter.attachView(view);
-        userLocation.findLocation();
+        presenter.onCreate(UserLocation.create(this), view);
         initBroadcastReceiver();
     }
 
     private void initBroadcastReceiver() {
-        NetworkChangeReceiver receiver = new NetworkChangeReceiver(new IOnItemClickListener<Boolean>() {
-            @Override
-            public void onClick(Boolean aBoolean) {
-                isNetConected = aBoolean;
-                Log.e("NET", isNetConected + "");
-            }
+        NetworkChangeReceiver receiver = new NetworkChangeReceiver(aBoolean -> {
+            isNetConnected = aBoolean;
+            Log.i("NET", isNetConnected + "");
         });
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
@@ -92,14 +83,14 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
     @Override
     protected void onResume() {
         super.onResume();
-        userLocation.findLocation();
+        presenter.findLocation();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         view.withMap(googleMap);
         mMap = googleMap;
-        userLocation.attachMap(mMap);
+        presenter.attachMap(mMap);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
@@ -137,33 +128,16 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
     }
 
     private void onCreateRoute(int markerPosition) {
-        if (!isNetConected) {
-            stackOfPoint.add(Location.createLocation(markers.get(markerPosition).getPosition().latitude,
-                    markers.get(markerPosition).getPosition().longitude));
-            stackOfPoint.add(Location.createLocation(markers.get(markerPosition - 1).getPosition().latitude,
-                    markers.get(markerPosition - 1).getPosition().longitude));
-        } else {
-            if (stackOfPoint.isEmpty()) {
-                presenter.onCreateRoute(
-                        Location.createLocation(markers.get(markerPosition).getPosition().latitude,
-                                markers.get(markerPosition).getPosition().longitude),
-                        Location.createLocation(markers.get(markerPosition - 1).getPosition().latitude,
-                                markers.get(markerPosition - 1).getPosition().longitude));
-            }
-            else {
-                for (int i = 0; i < stackOfPoint.size() - 1; i++) {
-                    presenter.onCreateRoute(stackOfPoint.get(i), stackOfPoint.get(i + 1));
-                }
-                stackOfPoint.clear();
-                presenter.onCreateRoute(
-                        Location.createLocation(markers.get(markerPosition).getPosition().latitude,
-                                markers.get(markerPosition).getPosition().longitude),
-                        Location.createLocation(markers.get(markerPosition - 1).getPosition().latitude,
-                                markers.get(markerPosition - 1).getPosition().longitude));
-            }
+        LatLng fromLatLng = markers.get(markerPosition).getPosition();
+        LatLng toLatLng = markers.get(markerPosition - 1).getPosition();
+        try {
+            presenter.onCreateRoute(
+                    Location.createLocation(fromLatLng.latitude, fromLatLng.longitude),
+                    Location.createLocation(toLatLng.latitude, toLatLng.longitude));
+        } catch (Exception e) {
+            Toast.makeText(getShelterApplication().getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
     public void removeLastAddedMarker() {
         if (markers.isEmpty()) {
@@ -181,9 +155,7 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
         }
         mMap.clear();
         markers.clear();
-        stackOfPoint.clear();
     }
-
 
     public static void push(Context context, long animalId, long shelterId, long volunteerId) {
         Intent intent = new Intent(context, RouteMapActivity.class);
