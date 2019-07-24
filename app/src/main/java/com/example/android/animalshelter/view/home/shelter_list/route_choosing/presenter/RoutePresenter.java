@@ -5,8 +5,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.IUserLocation;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.UserLocation;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.model.LocationPM;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.IRouteView;
+import com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.RouteView;
+import com.google.android.gms.maps.GoogleMap;
 import com.jeka.golub.shelter.domain.animal.Animal;
 import com.jeka.golub.shelter.domain.route.Location;
 import com.jeka.golub.shelter.domain.route.Route;
@@ -31,11 +35,13 @@ public class RoutePresenter implements IRoutePresenter {
     private final long currentAnimalId;
     private final long shelterId;
     private final long currentVolunteerId;
-    private IRouteView view;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private IRouteView view;
+    private IUserLocation userLocation;
 
     public RoutePresenter(
-            RoutesFacade facade, ExecutorService executor,
+            RoutesFacade facade,
+            ExecutorService executor,
             long currentAnimal,
             long shelterId,
             long currentVolunteerId) {
@@ -45,6 +51,14 @@ public class RoutePresenter implements IRoutePresenter {
         this.shelterId = shelterId;
         this.currentVolunteerId = currentVolunteerId;
     }
+
+    @Override
+    public void onCreate(IUserLocation userLocation, RouteView view) {
+        attachUserLocation(userLocation);
+        attachView(view);
+        findLocation();
+    }
+
 
     @Override
     public void onShowSelectedItem() {
@@ -112,6 +126,20 @@ public class RoutePresenter implements IRoutePresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(view::drawPolyline,
                         error -> Log.e("Route", "Error occurred", error));
+    }
+
+    private void attachUserLocation(IUserLocation userLocation) {
+        this.userLocation = userLocation;
+    }
+
+    @Override
+    public void findLocation() {
+        userLocation.findLocation();
+    }
+
+    @Override
+    public void attachMap(GoogleMap mMap) {
+        userLocation.attachMap(mMap);
     }
 
     @Override

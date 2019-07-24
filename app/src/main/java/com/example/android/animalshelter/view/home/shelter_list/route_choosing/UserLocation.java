@@ -7,12 +7,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -22,10 +20,14 @@ public class UserLocation implements IUserLocation {
     private LocationManager locationManager;
     private GoogleMap mMap;
 
-    public UserLocation(RouteMapActivity routeMapActivity) {
+    private UserLocation(RouteMapActivity routeMapActivity) {
         this.routeMapActivity = routeMapActivity;
         this.locationManager = (LocationManager) routeMapActivity.getSystemService(LOCATION_SERVICE);
 
+    }
+
+    public static IUserLocation create(RouteMapActivity routeMapActivity) {
+        return new UserLocation(routeMapActivity);
     }
 
     @Override
