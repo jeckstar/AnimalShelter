@@ -64,7 +64,9 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
         this.view = factory.createView(
                 this,
                 v -> removeLastAddedMarker(),
-                v -> removeAllMarkers());
+                v -> removeAllMarkers(),
+                v -> presenter.onTakeAnimalForAWalk()
+        );
 
         presenter.onCreate(UserLocation.create(this), view);
         initBroadcastReceiver();
@@ -73,7 +75,7 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
     private void initBroadcastReceiver() {
         NetworkChangeReceiver receiver = new NetworkChangeReceiver(aBoolean -> {
             isNetConnected = aBoolean;
-            Log.i("NET", isNetConnected + "");
+            Log.i("NET_CONNECTING", isNetConnected + "");
         });
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
@@ -93,6 +95,7 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
         presenter.attachMap(mMap);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getShelterApplication().getApplicationContext(), "Please, allow location permissions", Toast.LENGTH_LONG).show();
                 return;
             }
         }

@@ -26,7 +26,8 @@ public class RouteView implements IRouteView {
 
     public RouteView(FragmentActivity fragmentActivity,
                      View.OnClickListener onRemoveLastAddedMarker,
-                     View.OnClickListener onRemoveAllMarkers) {
+                     View.OnClickListener onRemoveAllMarkers,
+                     View.OnClickListener onTakeAnimalForAWalk) {
         rootView = fragmentActivity;
         tvKind = rootView.findViewById(R.id.tv_map_animal_kind);
         tvAnimalName = rootView.findViewById(R.id.tv_map_animal_name);
@@ -34,6 +35,7 @@ public class RouteView implements IRouteView {
         tvVolunteerLastName = rootView.findViewById(R.id.tv_map_volunteer_last_name);
         rootView.findViewById(R.id.iv_map_remove_marker).setOnClickListener(onRemoveLastAddedMarker);
         rootView.findViewById(R.id.iv_map_remove_all_markers).setOnClickListener(onRemoveAllMarkers);
+        rootView.findViewById(R.id.tv_map_take_animal_for_a_walk).setOnClickListener(onTakeAnimalForAWalk);
     }
 
 
@@ -42,7 +44,7 @@ public class RouteView implements IRouteView {
         Toast
                 .makeText(
                         rootView.getApplicationContext().getApplicationContext(),
-                        "Ups! It is not time to walk yet.",
+                        "Walking is started",
                         Toast.LENGTH_SHORT)
                 .show();
     }
@@ -52,7 +54,7 @@ public class RouteView implements IRouteView {
         Toast
                 .makeText(
                         rootView.getApplicationContext().getApplicationContext(),
-                        "Walking is started",
+                        "Ups! It is not time to walk yet.",
                         Toast.LENGTH_SHORT)
                 .show();
     }

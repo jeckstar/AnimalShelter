@@ -7,6 +7,7 @@ import com.example.android.network.route.MapQuestRetrofitRouteService;
 import com.example.android.network.route.RetrofitRouteController;
 import com.example.android.network.route.RouteFactory;
 import com.jeka.golub.shelter.domain.animal.AnimalRepository;
+import com.jeka.golub.shelter.domain.route.RouteRepository;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 import com.jeka.golub.shelter.domain.walk.WalkRepository;
 
@@ -37,6 +38,7 @@ public class RouteModule {
     public IRoutePresenter getAnimalCardPresenter(VolunteerRepository volunteerRepository,
                                                   AnimalRepository animalRepository,
                                                   WalkRepository walkRepository,
+                                                  RouteRepository routeRepository,
                                                   RetrofitRouteController controller
     ) {
         return new RoutePresenter(
@@ -44,6 +46,7 @@ public class RouteModule {
                         volunteerRepository,
                         animalRepository,
                         walkRepository,
+                        routeRepository,
                         new MapQuestRetrofitRouteService(
                                 controller,
                                 new RouteFactory())

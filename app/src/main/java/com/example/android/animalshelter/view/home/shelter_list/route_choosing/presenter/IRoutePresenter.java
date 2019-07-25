@@ -7,6 +7,8 @@ import com.example.android.animalshelter.view.presenter.Presenter;
 import com.google.android.gms.maps.GoogleMap;
 import com.jeka.golub.shelter.domain.route.Location;
 
+import java.util.List;
+
 public interface IRoutePresenter extends Presenter<IRouteView> {
 
     void onCreate(IUserLocation userLocation, RouteView view);

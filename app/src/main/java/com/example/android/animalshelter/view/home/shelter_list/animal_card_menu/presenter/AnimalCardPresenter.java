@@ -1,4 +1,4 @@
-package com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.presenter;
+package com.example.android.animalshelter.view.home.shelter_list.animal_card_menu.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -9,8 +9,8 @@ import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 import com.jeka.golub.shelter.domain.walk.Walk;
-import com.jeka.golub.shelter.domain.walk.WalkRepository;
 import com.jeka.golub.shelter.domain.walk.WalkException;
+import com.jeka.golub.shelter.domain.walk.WalkRepository;
 
 import java.util.Date;
 import java.util.List;

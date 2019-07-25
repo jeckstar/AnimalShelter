@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.IUserLocation;
-import com.example.android.animalshelter.view.home.shelter_list.route_choosing.UserLocation;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.model.LocationPM;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.IRouteView;
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.view.RouteView;
@@ -18,7 +17,10 @@ import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.walk.Walk;
 import com.jeka.golub.shelter.domain.walk.WalkException;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import io.reactivex.Observable;
@@ -38,6 +40,7 @@ public class RoutePresenter implements IRoutePresenter {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private IRouteView view;
     private IUserLocation userLocation;
+    private Collection<Route> routeSegments = new ArrayList<>();
 
     public RoutePresenter(
             RoutesFacade facade,
@@ -80,14 +83,21 @@ public class RoutePresenter implements IRoutePresenter {
     public void onTakeAnimalForAWalk() {
         executor.execute(() -> {
             try {
-                final Volunteer volunteer = facade.getVolunteerById(currentVolunteerId);
-                final Animal currentAnimal = facade.getAnimalById(currentAnimalId);
-                final Date now = new Date();
-                final Walk walk = volunteer.takeToTheWalk(currentAnimal, now);
-                final Animal updateAnimal = currentAnimal.setLastWalkTime(now);
-                facade.addWalk(walk);
-                facade.updateAnimal(shelterId, updateAnimal);
-                new Handler(Looper.getMainLooper()).post(() -> view.showThatVolunteerTakeAnimalForAWalkSuccessfully());
+                if (!routeSegments.isEmpty()) {
+                    final Volunteer volunteer = facade.getVolunteerById(currentVolunteerId);
+                    final Animal currentAnimal = facade.getAnimalById(currentAnimalId);
+                    final Date now = new Date();
+                    final Walk walk = volunteer.takeToTheWalk(currentAnimal, now);
+                    final Animal updateAnimal = currentAnimal.setLastWalkTime(now);
+                    facade.addWalk(walk);
+                    facade.updateAnimal(shelterId, updateAnimal);
+                    final long walkId = facade.getWalkInfo(walk);
+                    final Route route = createRoute(routeSegments, walkId);
+                    facade.addRoute(route);
+                    new Handler(Looper.getMainLooper()).post(() -> view.showThatVolunteerTakeAnimalForAWalkSuccessfully());
+                } else {
+                    new Handler(Looper.getMainLooper()).post(view::showWarningMassage);
+                }
             } catch (WalkException e) {
                 e.printStackTrace();
                 new Handler(Looper.getMainLooper()).post(view::showWarningMassage);
@@ -104,19 +114,36 @@ public class RoutePresenter implements IRoutePresenter {
 //                .subscribe(view::showThatVolunteerTakeAnimalForAWalkSuccessfully, e -> view.showWarningMassage());
     }
 
-    private void takeAnimalForAWalk(Volunteer volunteer, Animal animal) {
-        final Date now = new Date();
-        final Walk walk = volunteer.takeToTheWalk(animal, now);
-        final Animal updateAnimal = animal.setLastWalkTime(now);
-        facade.addWalk(walk);
-        facade.updateAnimal(shelterId, updateAnimal);
+    private Route createRoute(Iterable<Route> routeSegments, long walkId) {
+        List<Location> locations = new ArrayList<>();
+        for (Route route : routeSegments) {
+            for (Location location : route.getLocations()) {
+                locations.add(Location.createLocation(
+                        location.getLatitude(),
+                        location.getLongitude(),
+                        walkId));
+            }
+        }
+        return new Route(locations, walkId);
     }
+
+//    private void takeAnimalForAWalk(Volunteer volunteer, Animal animal) {
+//        final Date now = new Date();
+//        final Walk walk = volunteer.takeToTheWalk(animal, now);
+//        final Animal updateAnimal = animal.setLastWalkTime(now);
+//        facade.addWalk(walk);
+//        facade.updateAnimal(shelterId, updateAnimal);
+//    }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     @Override
     public void onCreateRoute(Location from, Location to) {
-        fromCallable(() -> facade.getRoute(from, to))
+        fromCallable(() -> {
+            Route route = facade.getRoute(from, to);
+            routeSegments.add(route);
+            return route;
+        })
                 .map(Route::getLocations)
                 .flatMapObservable(Observable::fromIterable)
                 .map(LocationPM::new)

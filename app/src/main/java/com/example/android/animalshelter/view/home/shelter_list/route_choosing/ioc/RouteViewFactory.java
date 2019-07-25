@@ -17,10 +17,12 @@ public class RouteViewFactory {
 
     public RouteView createView(FragmentActivity activity,
                                 View.OnClickListener onRemoveLastAddedMarker,
-                                View.OnClickListener onRemoveAllMarkers) {
+                                View.OnClickListener onRemoveAllMarkers,
+                                View.OnClickListener onTakeAnimalForAWalk) {
         return new RouteView(activity,
                 onRemoveLastAddedMarker,
-                onRemoveAllMarkers);
+                onRemoveAllMarkers,
+                onTakeAnimalForAWalk);
     }
 
 }
