@@ -1,4 +1,4 @@
-package com.jeka.golub.shelter.exeptions;
+package com.jeka.golub.shelter.domain.walk;
 
 public class WalkException extends RuntimeException {
 

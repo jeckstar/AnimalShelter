@@ -2,7 +2,6 @@ package com.example.android.animalshelter.view.home.shelter_list.animal_card_men
 
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -20,10 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class AllVolunteerRecyclerViewAdapter extends RecyclerView.Adapter<AllVolunteerRecyclerViewAdapter.ShelterViewHolder> {
     private final List<Volunteer> models;
     private final IOnItemClickListener<Volunteer> onChooseListener;
+    private final IOnItemClickListener<Volunteer> onChooseRouteListener;
 
-    public AllVolunteerRecyclerViewAdapter(List<Volunteer> models, IOnItemClickListener<Volunteer> onChooseListener) {
+    public AllVolunteerRecyclerViewAdapter(List<Volunteer> models,
+                                           IOnItemClickListener<Volunteer> onChooseListener,
+                                           IOnItemClickListener<Volunteer> onChooseRouteListener) {
         this.models = models;
         this.onChooseListener = onChooseListener;
+        this.onChooseRouteListener = onChooseRouteListener;
     }
 
     @NonNull
@@ -32,7 +35,8 @@ public class AllVolunteerRecyclerViewAdapter extends RecyclerView.Adapter<AllVol
         return new ShelterViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_volunteer, parent, false),
-                onChooseListener) {
+                onChooseListener,
+                onChooseRouteListener) {
         };
     }
 
@@ -47,7 +51,7 @@ public class AllVolunteerRecyclerViewAdapter extends RecyclerView.Adapter<AllVol
         return models.size();
     }
 
-    static class ShelterViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+    static class ShelterViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private final TextView id;
         private final TextView name;
         private final TextView lastName;
@@ -56,10 +60,14 @@ public class AllVolunteerRecyclerViewAdapter extends RecyclerView.Adapter<AllVol
         private Volunteer currentVolunteer;
 
         private final IOnItemClickListener<Volunteer> onChooseListener;
+        private final IOnItemClickListener<Volunteer> onChooseRouteListener;
 
-        public ShelterViewHolder(@NonNull View itemView, IOnItemClickListener<Volunteer> onChooseListener) {
+        public ShelterViewHolder(@NonNull View itemView,
+                                 IOnItemClickListener<Volunteer> onChooseListener,
+                                 IOnItemClickListener<Volunteer> onChooseRouteListener) {
             super(itemView);
             this.onChooseListener = onChooseListener;
+            this.onChooseRouteListener = onChooseRouteListener;
 
             id = itemView.findViewById(R.id.tv_item_volunteer_id);
             name = itemView.findViewById(R.id.tv_item_volunteer_name);
@@ -84,7 +92,10 @@ public class AllVolunteerRecyclerViewAdapter extends RecyclerView.Adapter<AllVol
                 onChooseListener.onClick(currentVolunteer);
                 return true;
             });
-            menu.add(0, v.getId(), 0, "ЧЁТ ЕЩЕ");
+            menu.add(0, v.getId(), 0, "Choose a route").setOnMenuItemClickListener(item -> {
+                onChooseRouteListener.onClick(currentVolunteer);
+                return true;
+            });
         }
 
     }

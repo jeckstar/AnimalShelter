@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "e05bee998bad8b2cf60bcee98aa4b368",
+    "identityHash": "95f12d02cde546419cd42cf48d14b4d8",
     "entities": [
       {
         "tableName": "animals",
@@ -178,7 +178,6 @@
       {
         "tableName": "walk_status",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `animal_Id` INTEGER NOT NULL, `volunteer_id` INTEGER NOT NULL, `walk_time` INTEGER NOT NULL, FOREIGN KEY(`animal_Id`) REFERENCES `animals`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`volunteer_id`) REFERENCES `volunteer`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
-
         "fields": [
           {
             "fieldPath": "id",
@@ -236,12 +235,56 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "route",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `latitude` TEXT, `longitude` TEXT, `walk_id` INTEGER NOT NULL, `index` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "walk_id",
+            "columnName": "walk_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "index",
+            "columnName": "index",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e05bee998bad8b2cf60bcee98aa4b368')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '95f12d02cde546419cd42cf48d14b4d8')"
     ]
   }
 }

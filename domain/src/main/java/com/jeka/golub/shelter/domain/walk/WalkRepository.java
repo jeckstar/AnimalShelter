@@ -7,4 +7,5 @@ public interface WalkRepository {
 
     List<Walk> getAll();
 
+    long getWalkId(Walk walk);
 }

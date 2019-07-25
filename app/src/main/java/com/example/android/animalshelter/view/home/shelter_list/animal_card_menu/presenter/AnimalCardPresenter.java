@@ -9,32 +9,31 @@ import com.jeka.golub.shelter.domain.animal.AnimalRepository;
 import com.jeka.golub.shelter.domain.volunteer.Volunteer;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 import com.jeka.golub.shelter.domain.walk.Walk;
+import com.jeka.golub.shelter.domain.walk.WalkException;
 import com.jeka.golub.shelter.domain.walk.WalkRepository;
-import com.jeka.golub.shelter.exeptions.WalkException;
 
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+
 public class AnimalCardPresenter implements IAnimalCardPresenter {
-    private final IAnimalCardView view;
     private final VolunteerRepository volunteerRepository;
     private final AnimalRepository animalRepository;
     private final WalkRepository walkRepository;
     private final Executor executor;
     private final long currentAnimalId;
     private final long shelterId;
+    private IAnimalCardView view;
 
 
     public AnimalCardPresenter(
-            IAnimalCardView view,
             VolunteerRepository volunteerRepository,
             AnimalRepository animalRepository,
             WalkRepository walkRepository,
             Executor executor,
             long currentAnimal,
             long shelterId) {
-        this.view = view;
         this.volunteerRepository = volunteerRepository;
         this.animalRepository = animalRepository;
         this.walkRepository = walkRepository;
@@ -43,11 +42,6 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
         this.shelterId = shelterId;
     }
 
-    @Override
-    public void onCreate() {
-        onShowAllVolunteersForCurrentShelter();
-        onShowSelectedAnimal();
-    }
 
     @Override
     public void onShowAllVolunteersForCurrentShelter() {
@@ -90,5 +84,17 @@ public class AnimalCardPresenter implements IAnimalCardPresenter {
                 new Handler(Looper.getMainLooper()).post(view::showWarningMassage);
             }
         });
+    }
+
+    @Override
+    public void attachView(IAnimalCardView view) {
+        this.view = view;
+        onShowAllVolunteersForCurrentShelter();
+        onShowSelectedAnimal();
+    }
+
+    @Override
+    public void detachView() {
+        this.view = null;
     }
 }

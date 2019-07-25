@@ -2,7 +2,7 @@ package com.jeka.golub.shelter.domain.volunteer;
 
 import com.jeka.golub.shelter.domain.animal.Animal;
 import com.jeka.golub.shelter.domain.walk.Walk;
-import com.jeka.golub.shelter.exeptions.WalkException;
+import com.jeka.golub.shelter.domain.walk.WalkException;
 
 import java.util.Date;
 

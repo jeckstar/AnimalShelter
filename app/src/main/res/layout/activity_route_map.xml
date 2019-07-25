@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.home.shelter_list.route_choosing.RouteMapActivity" />
+
+    <ImageView
+        android:id="@+id/iv_map_card_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="8dp"
+        android:alpha="0.6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/map_card_info" />
+
+
+    <ImageView
+        android:id="@+id/iv_map_card_line"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_map_card_info"
+        app:layout_constraintEnd_toEndOf="@+id/iv_map_card_info"
+        app:layout_constraintStart_toStartOf="@+id/iv_map_card_info"
+        app:layout_constraintTop_toTopOf="@+id/iv_map_card_info"
+        app:srcCompat="@drawable/map_card_line" />
+
+
+    <TextView
+        android:id="@+id/tv_map_animal_kind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_map_card_info"
+        app:layout_constraintStart_toStartOf="@+id/iv_map_card_info"
+        app:layout_constraintTop_toTopOf="@+id/iv_map_card_info"
+        tools:text="@string/kind" />
+
+    <TextView
+        android:id="@+id/tv_map_animal_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_map_animal_kind"
+        app:layout_constraintStart_toEndOf="@+id/tv_map_animal_kind"
+        app:layout_constraintTop_toTopOf="@+id/tv_map_animal_kind"
+        tools:text="@string/name" />
+
+    <TextView
+        android:id="@+id/tv_map_volunteer_first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_map_animal_name"
+        app:layout_constraintStart_toEndOf="@+id/iv_map_card_line"
+        app:layout_constraintTop_toTopOf="@+id/tv_map_animal_name"
+        tools:text="@string/first_name" />
+
+    <TextView
+        android:id="@+id/tv_map_volunteer_last_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_map_volunteer_first_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_map_volunteer_first_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_map_volunteer_first_name"
+        tools:text="@string/last_name" />
+
+    <TextView
+        android:id="@+id/iv_map_remove_all_markers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:alpha="0.6"
+        android:background="@drawable/map_card_info"
+        android:gravity="center"
+        android:text="@string/remove_all_n_markers"
+        app:layout_constraintBottom_toTopOf="@+id/iv_map_remove_marker"
+        app:layout_constraintEnd_toEndOf="@+id/iv_map_remove_marker"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/iv_map_remove_marker" />
+
+
+    <TextView
+        android:id="@+id/iv_map_remove_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="50dp"
+        android:alpha="0.6"
+        android:background="@drawable/map_card_info"
+        android:gravity="center"
+        android:text="@string/remove_last_nadded_marker"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_map_take_animal_for_a_walk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="50dp"
+        android:alpha="0.6"
+        android:background="@drawable/map_card_info"
+        android:gravity="center"
+        android:text="@string/take_animal_for_a_walk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

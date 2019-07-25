@@ -1,7 +1,7 @@
 package com.example.android.animalshelter.view.home.main_screen.main_menu_fragment.model;
 
-import com.example.android.animalshelter.view.home.create_volunteer.CreateVolunteerCardFragment;
 import com.example.android.animalshelter.view.home.create_shelter.CreateShelterCardFragment;
+import com.example.android.animalshelter.view.home.create_volunteer.CreateVolunteerCardFragment;
 import com.example.android.animalshelter.view.home.shelter_list.choose_shelter.ChoosingShelterFragment;
 
 import androidx.fragment.app.Fragment;
