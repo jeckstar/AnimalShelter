@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.android.network.route.RetrofitRouteController;
 import com.jeka.golub.shelter.domain.animal.AnimalRepository;
+import com.jeka.golub.shelter.domain.route.RouteRepository;
 import com.jeka.golub.shelter.domain.shelter.ShelterRepository;
 import com.jeka.golub.shelter.domain.volunteer.VolunteerRepository;
 import com.jeka.golub.shelter.domain.walk.WalkRepository;
@@ -11,6 +12,9 @@ import com.jeka.golub.shelter.persistence.ShelterDatabase;
 import com.jeka.golub.shelter.persistence.animal.AnimalEntityConverter;
 import com.jeka.golub.shelter.persistence.animal.SQLiteAnimalRepository;
 import com.jeka.golub.shelter.persistence.migration.DatabaseMigration;
+import com.jeka.golub.shelter.persistence.migration.DatabaseMigrationRouteTable;
+import com.jeka.golub.shelter.persistence.route.RouteEntityConverter;
+import com.jeka.golub.shelter.persistence.route.SQLiteRouteRepository;
 import com.jeka.golub.shelter.persistence.shelter.SQLiteShelterRepository;
 import com.jeka.golub.shelter.persistence.shelter.ShelterEntityConverter;
 import com.jeka.golub.shelter.persistence.volunteer.SQLiteVolunteerRepository;
@@ -39,6 +43,7 @@ public class InfrastructureModule {
         synchronized (ShelterDatabase.class) {
             return Room.databaseBuilder(context, ShelterDatabase.class, FILE_NAME)
                     .addMigrations(DatabaseMigration.MIGRATION_1_2)
+                    .addMigrations(DatabaseMigrationRouteTable.MIGRATION_2_3)
                     .build();
         }
     }
@@ -65,6 +70,12 @@ public class InfrastructureModule {
     @Provides
     public WalkRepository walkRepository(ShelterDatabase database) {
         return new SQLiteWalkRepository(database.getWalkDao(), new WalkEntityConverter());
+    }
+
+    @Singleton
+    @Provides
+    public RouteRepository routeRepository(ShelterDatabase database) {
+        return new SQLiteRouteRepository(database.getRouteDao(), new RouteEntityConverter());
     }
 
     @Singleton

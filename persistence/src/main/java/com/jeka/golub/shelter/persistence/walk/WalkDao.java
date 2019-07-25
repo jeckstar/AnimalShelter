@@ -19,6 +19,9 @@ public interface WalkDao {
     @Query("SELECT * FROM " + TABLE_NAME + " WHERE id = :id")
     WalkEntity getById(long id);
 
+    @Query("SELECT id FROM " + TABLE_NAME + " WHERE animal_Id = :animalId AND volunteer_id = :volunteerId AND walk_time = :walkTime")
+    long getId(long animalId, long volunteerId, long walkTime);
+
     @Insert
     void insert(WalkEntity animal);
 

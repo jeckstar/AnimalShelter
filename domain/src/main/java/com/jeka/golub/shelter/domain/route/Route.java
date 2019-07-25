@@ -7,6 +7,7 @@ public class Route {
 
     private final double distance;
     private final List<Location> locations;
+    private long walkId;
 
 
     public Route(double distance, List<Location> locations) {
@@ -14,8 +15,18 @@ public class Route {
         this.locations = locations;
     }
 
+    public Route(List<Location> locations, long walkId) {
+        this.distance = 0.0;
+        this.locations = locations;
+        this.walkId = walkId;
+    }
+
     public double getDistance() {
-        return distance;
+        if (distance != 0.0) {
+            return distance;
+        } else {
+            throw new NullPointerException();
+        }
     }
 
     public List<Location> getLocations() {
@@ -44,4 +55,11 @@ public class Route {
                 '}';
     }
 
+    public long getWalkId() {
+        if (walkId != 0.0) {
+            return walkId;
+        } else {
+            throw new NullPointerException();
+        }
+    }
 }

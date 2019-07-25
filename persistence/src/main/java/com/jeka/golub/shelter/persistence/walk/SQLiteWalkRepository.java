@@ -23,6 +23,15 @@ public class SQLiteWalkRepository implements WalkRepository {
     }
 
     @Override
+    public long getWalkId(Walk walk) {
+        final WalkEntity walkEntity = walkEntityConverter.convertForward(walk);
+        return dao.getId(
+                walkEntity.getAnimalId(),
+                walkEntity.getVolunteerId(),
+                walkEntity.getWalkTime());
+    }
+
+    @Override
     public List<Walk> getAll() {
         final List<WalkEntity> walkEntities = dao.getAll();
         final List<Walk> walks = new ArrayList<>(walkEntities.size());
