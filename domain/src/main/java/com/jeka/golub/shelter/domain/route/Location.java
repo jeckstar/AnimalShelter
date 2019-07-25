@@ -6,10 +6,17 @@ public class Location {
 
     private final double latitude;
     private final double longitude;
+    private long walkId;
 
     private Location(double latitude, double longitude) {
+        this.walkId = 0L;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+    private Location(double latitude, double longitude, long walkId) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.walkId = walkId;
     }
 
     public double getLatitude() {
@@ -41,5 +48,17 @@ public class Location {
 
     public static Location createLocation(double latitude, double longitude) {
         return new Location(latitude, longitude);
+    }
+
+    public static Location createLocation(double latitude, double longitude, long walkId) {
+        return new Location(latitude, longitude, walkId);
+    }
+
+    public long getWalkId() {
+        if (walkId != 0) {
+            return walkId;
+        } else {
+            throw new NullPointerException();
+        }
     }
 }
