@@ -33,4 +33,5 @@
     <string name="remove_last_nadded_marker">Remove last\nadded marker</string>
     <string name="remove_all_n_markers">Remove all\nmarkers</string>
     <string name="create_route">Create route</string>
+    <string name="take_animal_for_a_walk">Take animal\nfor a walk</string>
 </resources>
