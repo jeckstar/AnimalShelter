@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.android.animalshelter.R;
@@ -24,10 +25,14 @@ import static com.example.android.animalshelter.view.home.create_animal.view.Cre
 public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnimalsRecyclerViewAdapter.AnimalViewHolder> {
     private final List<Animal> models;
     private final IOnItemClickListener<Animal> onChooseListener;
+    private final IOnItemClickListener<Animal> onShowWalkHistory;
 
-    public AllAnimalsRecyclerViewAdapter(List<Animal> models, IOnItemClickListener<Animal> onChooseListener) {
+    public AllAnimalsRecyclerViewAdapter(List<Animal> models,
+                                         IOnItemClickListener<Animal> onChooseListener,
+                                         IOnItemClickListener<Animal> onShowWalkHistory) {
         this.models = models;
         this.onChooseListener = onChooseListener;
+        this.onShowWalkHistory = onShowWalkHistory;
     }
 
     @NonNull
@@ -41,7 +46,7 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder holder, int position) {
-        holder.bind(models.get(position), onChooseListener);
+        holder.bind(models.get(position), onChooseListener, onShowWalkHistory);
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), android.R.anim.fade_in));
     }
 
@@ -58,6 +63,7 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
         private final TextView period;
         private final TextView lastWalk;
         private final View vCard;
+        private final Button btnWalkHistory;
         private final int walkingBackground;
         private final int unlockedBackground;
         private final int restBackground;
@@ -67,19 +73,22 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
 
         public AnimalViewHolder(@NonNull View itemView) {
             super(itemView);
-            kind = itemView.findViewById(R.id.tv_item_animal_kind);
-            name = itemView.findViewById(R.id.tv_item_animal_name);
-            age = itemView.findViewById(R.id.tv_item_animal_age);
-            gender = itemView.findViewById(R.id.tv_item_animal_sex);
+            kind = itemView.findViewById(R.id.tv_item_walk_kind);
+            name = itemView.findViewById(R.id.tv_item_walk_name);
+            age = itemView.findViewById(R.id.tv_item_walk_volunteer_first_name);
+            gender = itemView.findViewById(R.id.tv_item_walk_volunteer_last_name);
             period = itemView.findViewById(R.id.tv_item_animal_walk_period);
             lastWalk = itemView.findViewById(R.id.tv_item_animal_last_walk);
             vCard = itemView.findViewById(R.id.cl_animal_card_animal);
+            btnWalkHistory = itemView.findViewById(R.id.btn_item_animal_walk_history);
             walkingBackground = vCard.getResources().getColor(R.color.redDE);
             unlockedBackground = vCard.getResources().getColor(R.color.green00B);
             restBackground = vCard.getResources().getColor(R.color.chocolate);
         }
 
-        void bind(Animal model, IOnItemClickListener<Animal> onChooseListener) {
+        void bind(Animal model,
+                  IOnItemClickListener<Animal> onChooseListener,
+                  IOnItemClickListener<Animal> onShowWalkHistory) {
             kind.setText(model.getKind());
             name.setText(model.getName());
             age.setText(String.format("%s year(s)", String.valueOf(model.getAge())));
@@ -116,6 +125,7 @@ public class AllAnimalsRecyclerViewAdapter extends RecyclerView.Adapter<AllAnima
                 vCard.setBackgroundColor(restBackground);
                 lastWalk.setText(restMassage(model));
             }
+            btnWalkHistory.setOnClickListener(v -> onShowWalkHistory.onClick(model));
         }
 
         private String lockedMassage(Animal model) {

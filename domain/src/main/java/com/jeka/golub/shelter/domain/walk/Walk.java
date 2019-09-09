@@ -57,11 +57,22 @@ public class Walk {
         return animal;
     }
 
+    public void setCurrentVolunteer(Volunteer volunteer) {
+        this.volunteer = volunteer;
+    }
+
     public Volunteer getVolunteer() {
         if (volunteer != null) {
             return volunteer;
         } else {
             throw new NullPointerException();
         }
+    }
+
+    public boolean setCurrentAnimal(Animal animal) {
+        if (animal.getId() == animalId) {
+            this.animal = animal;
+            return true;
+        } else return false;
     }
 }

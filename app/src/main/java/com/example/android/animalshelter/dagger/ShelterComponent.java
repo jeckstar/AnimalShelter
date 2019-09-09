@@ -19,6 +19,10 @@ import com.example.android.animalshelter.view.home.shelter_list.route_choosing.i
 import com.example.android.animalshelter.view.home.shelter_list.route_choosing.ioc.RouteSubcomponent;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuModule;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuSubcomponent;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.route_display.ioc.RouteDisplayModule;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.route_display.ioc.RouteDisplaySubcomponent;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.walk_history_menu.ioc.WalkHistoryModule;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.walk_history_menu.ioc.WalkHistorySubcomponent;
 
 import javax.inject.Singleton;
 
@@ -44,7 +48,11 @@ public interface ShelterComponent {
 
     ShelterCardMenuSubcomponent subcomponent(ShelterCardMenuModule module);
 
-    RouteSubcomponent subcomponent(RouteModule routeModule);
+    RouteSubcomponent subcomponent(RouteModule module);
+
+    WalkHistorySubcomponent subcomponent(WalkHistoryModule module);
+
+    RouteDisplaySubcomponent subcomponent(RouteDisplayModule module);
 }
 
 
