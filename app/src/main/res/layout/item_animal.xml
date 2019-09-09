@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_animal_card_animal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:id="@+id/cl_animal_card_animal"
     android:background="@color/greyC2"
     android:clickable="true"
     android:focusable="true"
@@ -14,9 +14,8 @@
     app:layout_constraintTop_toTopOf="parent">
 
 
-
     <TextView
-        android:id="@+id/tv_item_animal_kind"
+        android:id="@+id/tv_item_walk_kind"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -30,35 +29,36 @@
         tools:text="kind" />
 
     <TextView
-        android:id="@+id/tv_item_animal_name"
+        android:id="@+id/tv_item_walk_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:maxLines="2"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_kind"
-        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_kind"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_kind"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_walk_kind"
+        app:layout_constraintEnd_toStartOf="@+id/btn_item_animal_walk_history"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_walk_kind"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_walk_kind"
         tools:text="name" />
 
     <TextView
-        android:id="@+id/tv_item_animal_age"
+        android:id="@+id/tv_item_walk_volunteer_first_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:maxLines="2"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_name"
-        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_name"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_item_walk_kind"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_walk_kind"
         tools:text="age" />
 
     <TextView
-        android:id="@+id/tv_item_animal_sex"
+        android:id="@+id/tv_item_walk_volunteer_last_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:maxLines="2"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_age"
-        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_age"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_walk_volunteer_first_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_walk_volunteer_first_name"
         tools:text="sex" />
 
 
@@ -66,12 +66,15 @@
         android:id="@+id/tv_item_animal_last_walk"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:maxLines="2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_id"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_animal_kind"
+        app:layout_constraintEnd_toStartOf="@+id/btn_item_animal_walk_history"
+        app:layout_constraintStart_toStartOf="@+id/tv_item_walk_volunteer_first_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_walk_volunteer_first_name"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="last walk" />
 
 
@@ -81,10 +84,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:maxLines="2"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_item_animal_sex"
-        app:layout_constraintStart_toEndOf="@+id/tv_item_animal_sex"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_animal_sex"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_walk_volunteer_last_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_walk_volunteer_last_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_walk_volunteer_last_name"
         tools:text="period" />
+
+    <Button
+        android:id="@+id/btn_item_animal_walk_history"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/show_walk_history"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

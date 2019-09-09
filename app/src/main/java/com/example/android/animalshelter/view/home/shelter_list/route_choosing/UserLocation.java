@@ -1,6 +1,7 @@
 package com.example.android.animalshelter.view.home.shelter_list.route_choosing;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,24 +17,24 @@ import static android.content.Context.LOCATION_SERVICE;
 
 public class UserLocation implements IUserLocation {
 
-    private final RouteMapActivity routeMapActivity;
+    private final Context context;
     private LocationManager locationManager;
     private GoogleMap mMap;
 
-    private UserLocation(RouteMapActivity routeMapActivity) {
-        this.routeMapActivity = routeMapActivity;
-        this.locationManager = (LocationManager) routeMapActivity.getSystemService(LOCATION_SERVICE);
+    private UserLocation(Context context) {
+        this.context = context;
+        this.locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
 
     }
 
-    public static IUserLocation create(RouteMapActivity routeMapActivity) {
-        return new UserLocation(routeMapActivity);
+    public static IUserLocation create(Context Context) {
+        return new UserLocation(Context);
     }
 
     @Override
     public void findLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (routeMapActivity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && routeMapActivity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
         }
@@ -58,7 +59,7 @@ public class UserLocation implements IUserLocation {
         @Override
         public void onProviderEnabled(String provider) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (routeMapActivity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && routeMapActivity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
             }

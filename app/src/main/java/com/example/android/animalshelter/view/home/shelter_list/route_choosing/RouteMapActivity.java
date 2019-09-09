@@ -43,6 +43,7 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
     private RouteView view;
     private GoogleMap mMap;
     private boolean isNetConnected = false;
+    private NetworkChangeReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +69,12 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
                 v -> presenter.onTakeAnimalForAWalk()
         );
 
-        presenter.onCreate(UserLocation.create(this), view);
+        presenter.onCreate(UserLocation.create(getApplicationContext()), view);
         initBroadcastReceiver();
     }
 
     private void initBroadcastReceiver() {
-        NetworkChangeReceiver receiver = new NetworkChangeReceiver(aBoolean -> {
+        receiver = new NetworkChangeReceiver(aBoolean -> {
             isNetConnected = aBoolean;
             Log.i("NET_CONNECTING", isNetConnected + "");
         });
@@ -135,8 +136,8 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
         LatLng toLatLng = markers.get(markerPosition - 1).getPosition();
         try {
             presenter.onCreateRoute(
-                    Location.createLocation(fromLatLng.latitude, fromLatLng.longitude),
-                    Location.createLocation(toLatLng.latitude, toLatLng.longitude));
+                    Location.createLocation(toLatLng.latitude, toLatLng.longitude),
+                    Location.createLocation(fromLatLng.latitude, fromLatLng.longitude));
         } catch (Exception e) {
             Toast.makeText(getShelterApplication().getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
@@ -162,6 +163,7 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
 
     public static void push(Context context, long animalId, long shelterId, long volunteerId) {
         Intent intent = new Intent(context, RouteMapActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(KEY_PARAMETERS, new RouteMapActivityParameters(animalId, shelterId, volunteerId));
         context.startActivity(intent);
     }
@@ -211,6 +213,19 @@ public class RouteMapActivity extends ShelterActivity implements OnMapReadyCallb
 
         public long getVolunteerId() {
             return volunteerId;
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.presenter.detachView();
+        if (isFinishing()) {
+            getShelterApplication().dependencyInjection().closeRouteScope();
+        }
+        if (receiver != null) {
+            unregisterReceiver(receiver);
         }
     }
 
