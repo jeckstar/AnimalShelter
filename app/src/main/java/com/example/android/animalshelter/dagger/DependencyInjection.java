@@ -31,6 +31,12 @@ import com.example.android.animalshelter.view.home.shelter_list.route_choosing.i
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ShelterCardMenuFragment;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuModule;
 import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.ioc.ShelterCardMenuSubcomponent;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.route_display.RouteDisplayFragment;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.route_display.ioc.RouteDisplayModule;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.route_display.ioc.RouteDisplaySubcomponent;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.walk_history_menu.WalkHistoryFragment;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.walk_history_menu.ioc.WalkHistoryModule;
+import com.example.android.animalshelter.view.home.shelter_list.shelter_card_menu.walk_history_menu.ioc.WalkHistorySubcomponent;
 
 public class DependencyInjection {
 
@@ -40,6 +46,8 @@ public class DependencyInjection {
     private ShelterCardMenuSubcomponent shelterCardMenuSubcomponent;
     private HomeScreenSubcomponent homeScreenSubcomponent;
     private RouteSubcomponent routeSubcomponent;
+    private WalkHistorySubcomponent walkHistorySubcomponent;
+    private RouteDisplaySubcomponent routeDisplaySubcomponent;
 
     public DependencyInjection(Context context) {
         this.component = DaggerShelterComponent.builder().shelterApplicationModule(new ShelterApplicationModule(context)).build();
@@ -155,5 +163,31 @@ public class DependencyInjection {
 
     public void closeRouteScope() {
         this.routeSubcomponent = null;
+    }
+
+    public void openWalkHistoryScope(long animalId) {
+        this.walkHistorySubcomponent = this.component.subcomponent(new WalkHistoryModule(animalId));
+    }
+
+    public void inject(WalkHistoryFragment fragment) {
+        this.walkHistorySubcomponent.inject(fragment);
+    }
+
+    public void closeWalkHistoryScope() {
+        this.walkHistorySubcomponent = null;
+    }
+
+
+
+    public void openRouteDisplayScope(long walkId) {
+        this.routeDisplaySubcomponent = this.component.subcomponent(new RouteDisplayModule(walkId));
+    }
+
+    public void inject(RouteDisplayFragment fragment) {
+        this.routeDisplaySubcomponent.inject(fragment);
+    }
+
+    public void closeRouteDisplayScope() {
+        this.routeDisplaySubcomponent = null;
     }
 }

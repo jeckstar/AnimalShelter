@@ -8,4 +8,6 @@ public interface WalkRepository {
     List<Walk> getAll();
 
     long getWalkId(Walk walk);
+
+    List<Walk> getAllWalkByAnimalId(long currentAnimal);
 }
