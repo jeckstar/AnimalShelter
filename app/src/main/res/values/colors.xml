@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    //Base theme
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/newBlack</color>
+    <color name="colorAccent">@color/basic_orange</color>
+
+    //Dark theme
+    <color name="darkThemeTextColorPrimary">@color/white</color>
+    <color name="darkThemeTextColorTertiaryInverse">@color/new_gray_1</color>
+
+
+    <color name="newGreen1DT">#36622E</color>
+    <color name="newGreen2">#2FA81A</color>
+    <color name="newGreen3">#39CA1F</color>
+    <color name="newBlack">#181818</color>
+    <color name="newBlack2">#242424</color>
+    <color name="newBlack3">#353535</color>
+    <color name="new_gray_dark_1">#424242</color>
+    <color name="new_gray_dark_3">#555555</color>
+    <color name="new_gray_1">#878787</color>
+    <color name="new_gray_2">#A8A8A8</color>
+    <color name="new_gray_5">#EDEDED</color>
+    <color name="new_gray_4">#D9D9D9</color>
+    <color name="newOrange2">#FE7328</color>
+    <color name="newOrange2Pressed">#A54C1D</color>
+    <color name="grayDark1">#424242</color>
+    <color name="red_indicator">#E52441</color>
+    <color name="new_red_indicator_2">#6A3038</color>
+    <color name="new_red_indicator_3">#DDA3AB</color>
+    <color name="orange9A">#9A562F</color>
+    <color name="orangeFE">#FEB38B</color>
+    <color name="green36">#36622E</color>
+
+    <color name="colorErrorText">#FF4E4E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray7D">#7D7D7D</color>
+    <color name="gray_medium">#C2C2C2</color>
+    <color name="gray_light">#F8F9F9</color>
+    <color name="ultra_black">#313131</color>
+    <color name="basic_orange">#FE7628</color>
+    <color name="shadow">#5C6B6B6B</color>
+    <color name="black">#000000</color>
+    <color name="orange">#FE7628</color>
+    <color name="grey72">#727377</color>
+    <color name="greyC2">#C2C2C2</color>
+    <color name="green00B">#00B600</color>
+    <color name="green006">#006221</color>
+    <color name="grey41">#414141</color>
+    <color name="grayDark41">#414141</color>
+    <color name="transparent00">#0000ffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="white_grey_ED">#EDF0F1</color>
+    <color name="orange61">#d1661e</color>
+    <color name="chocolate">#D2691E</color>
+    <color name="saddlebrown">#8B4513</color>
+    <color name="whiteF8">#F8F9F9</color>
+    <color name="redDE">#DE0F0F</color>
+    <color name="redE5">#E52441</color>
 </resources>
